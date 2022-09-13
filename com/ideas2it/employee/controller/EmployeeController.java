@@ -17,6 +17,7 @@ public class EmployeeController {
      * to service section.
      * @param employee object parameter is passed by controller
      * @return the employeeDeatil from the service class.
+     * 13-09-2022.
      */
     public boolean addEmployee(Employee employee) {
         return employeeManagementService.addEmployee(employee);
