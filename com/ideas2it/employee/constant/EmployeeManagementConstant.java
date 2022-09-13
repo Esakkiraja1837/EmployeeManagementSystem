@@ -3,7 +3,8 @@ package com.ideas2it.employee.constant;
 /**
  * declaring constants
  * @version 1.0
- * @author  ESAKKIRAJA E. 
+ * @author  ESAKKIRAJA E.
+ * 13-09-2022. 
  */
 
 public class EmployeeManagementConstant {
