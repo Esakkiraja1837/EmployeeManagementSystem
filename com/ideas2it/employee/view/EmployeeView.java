@@ -18,7 +18,7 @@ import java.util.Scanner;
 /**
  * This method used to get the details of the employee from the user
  * and set in the pojo class.
- * @version 2.0.
+ * @version 2.0.  13-09-2022.
  * @author  ESAKKIRAJA E.
  */
 
