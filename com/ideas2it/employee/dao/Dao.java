@@ -1,18 +1,16 @@
-package com.ideas2it.employee.service;
-
-import com.ideas2it.employee.controller.EmployeeController;
+package com.ideas2it.employee.dao;
 
 import com.ideas2it.employee.model.Address;
 import com.ideas2it.employee.model.Employee;
 import java.util.List;
 
 /**
- * Below interface used to declare the abstract method
+ * Interface used to declare the abstract method
  * to employeemanagementservice class.
  * @version 2.0.  13-09-2022.
  * @author  ESAKKITRAJA E.
  */
-public interface EmployeeManagement {
+public interface Dao {  
 
 
     /**
@@ -42,13 +40,6 @@ public interface EmployeeManagement {
      * @return Return the boolean value.
      */
     boolean deleteEmployee(String name);
-
-    /**
-     * Search the employee Details.
-     * @param employee name.
-     * @return Return the employee value.
-     */
-    Employee searchEmployee(String name);
 }
 
 

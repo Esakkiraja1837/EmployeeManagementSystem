@@ -2,10 +2,11 @@ package com.ideas2it.employee.view;
 
 import com.ideas2it.employee.constant.EmployeeManagementConstant;
 import com.ideas2it.employee.controller.EmployeeController;
-import com.ideas2it.employee.model.Address;
-import com.ideas2it.employee.model.Employee;
-import com.ideas2it.employee.service.EmployeeManagement;
-import com.ideas2it.employee.service.impl.EmployeeManagementService;
+import com.ideas2it.employee.model.AddressDTO;
+import com.ideas2it.employee.model.EmployeeDTO;
+import com.ideas2it.employee.dao.Dao;
+import com.ideas2it.employee.service.EmployeeManagementService;
+import com.ideas2it.employee.dao.impl.EmployeeDao;
 import com.ideas2it.employee.util.EmployeeUtil;
 
 import java.time.LocalDate;
@@ -27,7 +28,7 @@ public class EmployeeView {
     Scanner scanner = new Scanner(System.in);
     EmployeeController employeeController = new EmployeeController(); 
     EmployeeUtil employeeUtil = new EmployeeUtil();
-    Employee employee = new Employee();
+    EmployeeDTO employeeDTO = new EmployeeDTO();
 
     /**
      *  method makes the user to choose the CRUD operation.
@@ -43,7 +44,7 @@ public class EmployeeView {
                      .append("\te - SEARCH \n\tf - EXIT \n\n");
 
         do {
-            System.out.println(menuOption.toString());
+                System.out.println(menuOption.toString());
             System.out.println(EmployeeManagementConstant.VALID_INPUT);
             option = scanner.next();
 
@@ -107,10 +108,10 @@ public class EmployeeView {
             System.out.println("Enter date of Joinning (yyyy-mm-dd) ");
             LocalDate dateOfJoining = employeeUtil.getDate();
 
-            employee = new Employee(name, id, age, mobileNumber, emailId,
+            employeeDTO = new EmployeeDTO(name, id, age, mobileNumber, emailId,
                                     salary, addAddress(), dateOfJoining);
 
-            if (employeeController.addEmployee(employee)) {
+            if (employeeController.addEmployee(employeeDTO)) {
                 System.out.println("Employee details stored.");
             } else {
                 System.out.println("Employee details not stored.");
@@ -120,7 +121,7 @@ public class EmployeeView {
         }
     }
 
-    private Address addAddress() {
+    private AddressDTO addAddress() {
         System.out.println("Enter Employee Flat Number: ");
         String flatNo = scanner.next();
 
@@ -139,20 +140,20 @@ public class EmployeeView {
         System.out.println("Enter Employee Pin Code: ");
         int pinCode = scanner.nextInt();
 
-        Address address = new Address(flatNo, streetName, homeTown, district,
+        AddressDTO addressDTO = new AddressDTO(flatNo, streetName, homeTown, district,
                               state, pinCode);
-        return address;
+        return addressDTO;
     }
 
     /**
      * Display the saved employeeDetails.
      */
     public void displayEmployee() {
-        List<Employee> employeesDetail = employeeController.displayEmployee();
-        Iterator<Employee> iterator = employeesDetail.iterator(); 
+        List<EmployeeDTO> employeesDetail = employeeController.displayEmployee();
+        Iterator<EmployeeDTO> iterator = employeesDetail.iterator(); 
         while (iterator.hasNext()) {
-            Employee employee =  iterator.next();
-            System.out.println(employee.toString());
+            EmployeeDTO employeeDTO =  iterator.next();
+            System.out.println(employeeDTO.toString());
         }
     }
 
@@ -168,7 +169,7 @@ public class EmployeeView {
 
         System.out.println(EmployeeManagementConstant.EMPLOYEE_ID);
         int id = scanner.nextInt();
-        employee.setId(id);
+        employeeDTO.setId(id);
 
         System.out.println(EmployeeManagementConstant.EMPLOYEE_AGE);
         int age = scanner.nextInt();
@@ -182,15 +183,15 @@ public class EmployeeView {
         System.out.println("Enter Employee Salary: ");
         double salary = scanner.nextDouble();
 
-        Address address = addAddress();
+        AddressDTO addressDTO = addAddress();
 
         System.out.println("Enter date of Joinning (yyyy-mm-dd) ");
         LocalDate dateOfJoining = employeeUtil.getDate();
 
-        employee = new Employee(name, id, age, mobileNumber, emailId,
-                                      salary, address, dateOfJoining);
+        employeeDTO = new EmployeeDTO(name, id, age, mobileNumber, emailId,
+                                      salary, addressDTO, dateOfJoining);
 
-        if (employeeController.updateEmployee(employee) != false) {
+        if (employeeController.updateEmployee(employeeDTO) != false) {
             System.out.println("Update the Employee Details");
         } else {
             System.out.println("Not Update the Employee Details");
@@ -222,7 +223,7 @@ public class EmployeeView {
 
         System.out.println(EmployeeManagementConstant.EMPLOYEE_NAME);
         String name = scanner.next();
-        Employee selectEmployee = employeeController.searchEmployee(name);
+        EmployeeDTO selectEmployee = employeeController.searchEmployee(name);
         if (selectEmployee != null) {
             System.out.println(selectEmployee);
         } else {

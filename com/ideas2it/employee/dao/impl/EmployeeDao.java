@@ -1,19 +1,26 @@
-package com.ideas2it.employee.service.impl;
+package com.ideas2it.employee.dao.impl;
 
-import com.ideas2it.employee.controller.EmployeeController;
+import com.ideas2it.employee.service.EmployeeManagementService;
 import com.ideas2it.employee.model.Address;
+import com.ideas2it.employee.dao.Dao;
 import com.ideas2it.employee.model.Employee;
-import com.ideas2it.employee.service.EmployeeManagement;
+import com.ideas2it.employee.mapper.ModelMapper;
 import com.ideas2it.employee.view.EmployeeView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmployeeManagementService implements EmployeeManagement {
+
+/**
+ * Below class used to declare the interface method
+ * @version 2.0.  15-09-2022.
+ * @author  ESAKKITRAJA E.
+ */
+public class EmployeeDao implements Dao {
     List<Employee> employeeDetail = new ArrayList<Employee>();
+    ModelMapper modelMapper = new ModelMapper();
 
     /**
-     * 13-09-2022.
      * {@inheritDoc}
      */
     @Override   

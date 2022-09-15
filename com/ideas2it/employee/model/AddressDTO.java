@@ -3,13 +3,13 @@ package com.ideas2it.employee.model;
 import java.time.LocalDate;
 
 /**
- * It present employee Address.
+ * It present employee AddressDTO.
  *
  * @version 1.1
  * @author  ESAKKIRAJA E
- * 13-09-2022.
+ * 15-09-2022.
  */
-public class Address {
+public class AddressDTO {
 
     private String flatNo;
     private String streetName;
@@ -18,11 +18,11 @@ public class Address {
     private String state;
     private int pinCode;
 
-    public Address() { 
+    public AddressDTO() { 
     }
 
-    public Address(String flatNo, String streetName, String homeTown,
-                   String district, String state, int pinCode ) {
+    public AddressDTO(String flatNo, String streetName, String homeTown,
+                      String district, String state, int pinCode ) {
         this.flatNo = flatNo;
         this.streetName = streetName;
         this.homeTown = homeTown;
