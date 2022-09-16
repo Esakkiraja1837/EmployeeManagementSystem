@@ -1,19 +1,20 @@
 package com.ideas2it.employee.mapper;
 
 import com.ideas2it.employee.model.Address;
-import com.ideas2it.employee.model.AddressDTO;
+import com.ideas2it.employee.dto.AddressDTO;
 import com.ideas2it.employee.model.Employee;
-import com.ideas2it.employee.model.EmployeeDTO;
+import com.ideas2it.employee.dto.EmployeeDTO;
 
 /*
  * class Convert DTO object to model Object and Model to DTO
  *
 
  */
-public class ModelMapper {
+public class EmployeeMapper {
 
     /*
      * Convert Employee model object to EmployeeDTO object
+     * 
      * @param employeeDTO 
      * @return employee
      */
@@ -26,8 +27,8 @@ public class ModelMapper {
         employeeDTO.setMobileNumber(employee.getMobileNumber());
         employeeDTO.setEmailId(employee.getEmailId());
         employeeDTO.setSalary(employee.getSalary());
-        employeeDTO.setAddressDTO(toAddressDTO(employee.getAddressDTO()));
-        employeeDTO.setDateOfJoining(employee.getDateOfJoining());
+        employeeDTO.setAddress(toAddressDTO(employee.getAddress()));
+        employeeDTO.setJoiningDate(employee.getJoiningDate());
 
         return employeeDTO;
     }
@@ -48,7 +49,7 @@ public class ModelMapper {
         employee.setEmailId(employeeDTO.getEmailId());
         employee.setSalary(employeeDTO.getSalary());
         employee.setAddress(toAddress(employeeDTO.getAddress()));
-        employee.setDateOfJoining(employeeDTO.getDateOfJoining());
+        employee.setJoiningDate(employeeDTO.getJoiningDate());
 
         return employee;
 
@@ -84,7 +85,7 @@ public class ModelMapper {
         Address address = new Address();
 
         address.setFlatNo(addressDTO.getFlatNo());
-        address.setStreet(addressDTO.getStreet());
+        address.setStreetName(addressDTO.getStreetName());
         address.setHomeTown(addressDTO.getHomeTown());
         address.setDistrict(addressDTO.getDistrict());
         address.setState(addressDTO.getState());

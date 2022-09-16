@@ -1,8 +1,9 @@
 package com.ideas2it.employee.controller;
 
-import com.ideas2it.employee.model.AddressDTO;
-import com.ideas2it.employee.model.EmployeeDTO;
-import com.ideas2it.employee.service.EmployeeManagementService;
+import com.ideas2it.employee.dto.AddressDTO;
+import com.ideas2it.employee.dto.EmployeeDTO;
+import com.ideas2it.employee.service.EmployeeService;
+import com.ideas2it.employee.service.employeeManagement.EmployeeManagementService;
 import com.ideas2it.employee.view.EmployeeView;
 
 import java.util.List;

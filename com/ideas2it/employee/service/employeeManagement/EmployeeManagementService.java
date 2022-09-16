@@ -1,11 +1,12 @@
-package com.ideas2it.employee.service;
+package com.ideas2it.employee.service.employeeManagement;
 
 import com.ideas2it.employee.dao.Dao;
 import com.ideas2it.employee.dao.impl.EmployeeDao;
-import com.ideas2it.employee.model.AddressDTO;
+import com.ideas2it.employee.dto.AddressDTO;
 import com.ideas2it.employee.model.Employee;
-import com.ideas2it.employee.model.EmployeeDTO;
-import com.ideas2it.employee.mapper.ModelMapper;
+import com.ideas2it.employee.service.EmployeeService;
+import com.ideas2it.employee.dto.EmployeeDTO;
+import com.ideas2it.employee.mapper.EmployeeMapper;
 import com.ideas2it.employee.view.EmployeeView;
 
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 
 public class EmployeeManagementService {  
     EmployeeDao employeeDao = new EmployeeDao();
-    ModelMapper modelMapper = new ModelMapper();
+    EmployeeMapper employeeMapper = new EmployeeMapper();
 
     /**
      * Get's the value from viewand transfer to service section.
@@ -21,7 +22,7 @@ public class EmployeeManagementService {
      * @return returns true if employee added
      */
     public boolean addEmployee(EmployeeDTO employeeDTO) {
-        return employeeDao.addEmployee(modelMapper.toEmployee(employeeDTO));
+        return employeeDao.addEmployee(employeeMapper.toEmployee(employeeDTO));
     }
 
     /**
@@ -30,13 +31,13 @@ public class EmployeeManagementService {
      * @return the employee details from the service class.
      */
     public List<EmployeeDTO> displayEmployee() {
-        List<Employee> employeeDetails = EmployeeDao.displayEmployee();
-        List<EmployeeDTO> employeeDTO = new ArrayList<EmployeeDTO>();
+        List<Employee> employeeDetails = employeeDao.displayEmployee();
+        List<EmployeeDTO> employeeDto = new ArrayList<EmployeeDTO>();
         for (int i = 0; i < employeeDetails.size(); i++) {
             Employee employee = employeeDetails.get(i);
-            employeeDTO.add(modelMapper.toEmployeeDTO(employee));
+            employeeDto.add(employeeMapper.toEmployeeDTO(employee));
         }
-        return employeeDTO;
+        return employeeDto;
     }
 
     /**
@@ -45,7 +46,7 @@ public class EmployeeManagementService {
      * @return the employee details from the service class.
      */
     public boolean updateEmployee(EmployeeDTO employeeDTO) {
-        return employeeDao.updateEmployee(ModelMapper.toEmployee(employeeDTO));
+        return employeeDao.updateEmployee(employeeMapper.toEmployee(employeeDTO));
     }
 
     /**
@@ -58,13 +59,14 @@ public class EmployeeManagementService {
     }
 
     public EmployeeDTO searchEmployee(String name) {
-        List<EmployeeDTO> employeesDTO = displayEmployee();
+        List<EmployeeDTO> employeesDto = displayEmployee();
         EmployeeDTO searchEmployeeDto = null;
-        for (int i = 0; i < employeesDTO.size(); i++) {
-            if (employeesDTO.get(i).getName().equals(name)) {
-                searchEmployeeDTO = employeesDTO.get(i);
+        for (int i = 0; i < employeesDto.size(); i++) {
+            if (employeesDto.get(i).getName().equals(name)) {
+                searchEmployeeDto = employeesDto.get(i);
             }
         }
-        return searchEmployeeDTO;
+        return searchEmployeeDto;
+    }
 
 }
