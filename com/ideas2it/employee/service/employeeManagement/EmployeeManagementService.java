@@ -54,15 +54,15 @@ public class EmployeeManagementService {
      *
      * @return true if employeeDetails deleted
      */
-    public boolean deleteEmployee(String name) {
-        return employeeDao.deleteEmployee(name);
+    public boolean deleteEmployee(String firstName) {
+        return employeeDao.deleteEmployee(firstName);
     }
 
-    public EmployeeDTO searchEmployee(String name) {
+    public EmployeeDTO searchEmployee(String firstName) {
         List<EmployeeDTO> employeesDto = displayEmployee();
         EmployeeDTO searchEmployeeDto = null;
         for (int i = 0; i < employeesDto.size(); i++) {
-            if (employeesDto.get(i).getName().equals(name)) {
+            if (employeesDto.get(i).getName().equals(firstName)) {
                 searchEmployeeDto = employeesDto.get(i);
             }
         }

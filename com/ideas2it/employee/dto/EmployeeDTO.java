@@ -10,37 +10,48 @@ import java.time.LocalDate;
  * 13-09-2022.
  */
 public class EmployeeDTO {
-    private String name; 
-    private int id;
-    private int age;
+    private String firstName; 
+    private String lastName;
+    private int employeeId;
+    private String role;
     private long mobileNumber;
     private String emailId;
     private double salary;
     private AddressDTO addressDTO;
     private LocalDate joiningDate;
+    private LocalDate dateOfBirth;
+    private String gender;
 
     public EmployeeDTO() {
     }
 
-    public EmployeeDTO(String name, int id, int age, long mobileNumber, 
-                    String emailId, double salary, AddressDTO addressDTO,
-                    LocalDate joiningDate) {
-        this.name = name;
-        this.id = id;
-        this.age = age;
+    public EmployeeDTO(String firstName, String lastName, int employeeId,
+                       String role, long mobileNumber,String emailId,
+                       double salary, AddressDTO addressDTO,
+                       LocalDate joiningDate, LocalDate dateOfBirth, String gender) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.employeeId = employeeId;
+        this.role = role;
         this.mobileNumber = mobileNumber;
         this.emailId = emailId;
         this.salary  = salary;
         this.addressDTO = addressDTO;
         this.joiningDate = joiningDate;
+        this.dateOfBirth = dateOfBirth;
+        this.gender = gender; 
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public void setMobileNumber(long mobileNumber) {
@@ -51,8 +62,8 @@ public class EmployeeDTO {
         this.emailId = emailId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int employeeId) {
+        this.employeeId = employeeId;
     }
 
     public void setAddress(AddressDTO addressDTO) {
@@ -67,12 +78,24 @@ public class EmployeeDTO {
         this.joiningDate = joiningDate;
     }
 
-    public String getName() {
-        return name;
+    public void setDateOfBirth(LocalDate  dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
-    public int getId() {
-        return id;
+    public void setGender(String Gender) {
+        this.gender = gender;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public int getEmployeeId() {
+        return employeeId;
     }
 
     public double getSalary() {
@@ -83,8 +106,16 @@ public class EmployeeDTO {
         return joiningDate;
     }
 
-    public int  getAge() {
-        return age;
+    public LocalDate  getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public String  getRole() {
+        return role;
+    }
+
+    public String  getGender() {
+        return gender;
     }
 
     public String  getEmailId() {
@@ -99,6 +130,7 @@ public class EmployeeDTO {
         return mobileNumber;
     }
 
+
     /**
      * overiding toString() Method.
      * inside toString Method it uses String Builder to Concat 
@@ -107,13 +139,16 @@ public class EmployeeDTO {
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("\n Detail of Employee: \n")
-               .append("\n Name            : ").append(this.getName())
-               .append("\n ID              : ").append(this.getId())
-               .append("\n Age             : ").append(this.getAge())
+               .append("\n First Name      : ").append(this.getFirstName())
+               .append("\n Last Name       : ").append(this.getLastName())
+               .append("\n Employee ID     : ").append(this.getEmployeeId())
+               .append("\n Employee Role            : ").append(this.getRole())
                .append("\n Mobile Number   : ").append(this.getMobileNumber())
                .append("\n Salary          : ").append(this.getSalary())
                .append("\n Email Id        : ").append(this.getEmailId())
                .append("\n Joining Of Date : ").append(this.getJoiningDate())
+               .append("\n Date Of Birth   : ").append(this.getDateOfBirth())
+               .append("\n Gender          : ").append(this.getGender())
                .append(this.getAddress());
         return builder.toString();
 

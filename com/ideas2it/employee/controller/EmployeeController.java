@@ -44,8 +44,8 @@ public class EmployeeController {
      *
      * @return true if employee is deleted
      *
-    public boolean deleteEmployee(String name) {
-        return employeeService.deleteEmployee(name);
+    public boolean deleteEmployee(String firstName) {
+        return employeeService.deleteEmployee(firstName);
     }
 
     /**
@@ -54,8 +54,8 @@ public class EmployeeController {
      * @param Employee name
      * @return Returns employeedetails.
      */
-    public EmployeeDTO searchEmployee(String name) {
-        return employeeService.searchEmployee(name);
+    public EmployeeDTO searchEmployee(String firstName) {
+        return employeeService.searchEmployee(firstName);
     }
 
 }

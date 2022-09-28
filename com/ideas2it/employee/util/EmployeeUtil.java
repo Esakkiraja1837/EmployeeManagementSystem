@@ -18,6 +18,13 @@ public class EmployeeUtil {
         LocalDate dateOfJoining = LocalDate.parse(date);
         return dateOfJoining;
     }
+
+    public LocalDate getDate() {
+
+        String date =scanner.next();
+        LocalDate dateOfBirth = LocalDate.parse(date);
+        return dateOfBirth;
+    }
 }
 
     

@@ -11,40 +11,36 @@ import java.time.LocalDate;
  */
 public class Address {
 
-    private String flatNo;
-    private String streetName;
-    private String homeTown;
-    private String district;
+    private String doorNo;
+    private String street;
+    private String city;
     private String state;
     private int pinCode;
+    private String type;
 
     public Address() { 
     }
 
-    public Address(String flatNo, String streetName, String homeTown,
-                   String district, String state, int pinCode ) {
-        this.flatNo = flatNo;
-        this.streetName = streetName;
-        this.homeTown = homeTown;
-        this.district= district;
+    public Address(String doorNo, String street, String city,
+                   String state, int pinCode, String type) {
+        this.doorNo = doorNo;
+        this.street = street;
+        this.city = city;
         this.state = state;
         this.pinCode = pinCode;
+        this.type = type;
     }
 
-    public void setFlatNo(String flatNo) {
-        this.flatNo = flatNo;
+    public void setDoorNo(String DoorNo) {
+        this.doorNo = doorNo;
     }
 
-    public void setStreetName(String streetName) {
-        this.streetName = streetName;
+    public void setStreet(String street) {
+        this.street = street;
     }
 
-    public void setHomeTown(String homeTown) {
-        this.homeTown = homeTown;
-    }
-
-    public void setDistrict(String district) {
-        this.district = district;
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public void setState(String state) {
@@ -55,20 +51,21 @@ public class Address {
         this.pinCode = pinCode;
     }
 
-    public String  getFlatNo() {
-        return flatNo;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public String  getStreetName() {
-        return streetName;
+
+    public String  getDoorNo() {
+        return doorNo;
     }
 
-    public String  getHomeTown() {
-        return homeTown;
+    public String  getStreet() {
+        return street;
     }
 
-    public String  getDistrict() {
-        return district;
+    public String  getCity() {
+        return city;
     }
 
     public String  getState() {
@@ -79,15 +76,19 @@ public class Address {
         return pinCode;
     }
 
+    public String  getType() {
+        return type;
+    }
+
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("\n\n ADDRESS of Employee: \n")
-               .append("\n FlatNo           : ").append(this.getFlatNo())
-               .append("\n StreetName       : ").append(this.getStreetName())
-               .append("\n Home Town        : ").append(this.getHomeTown())
-               .append("\n District         : ").append(this.getDistrict())
+               .append("\n DoorNo           : ").append(this.getDoorNo())
+               .append("\n Street           : ").append(this.getStreet())
+               .append("\n City             : ").append(this.getCity())
                .append("\n State            : ").append(this.getState())
-               .append("\n PinCode          : ").append(this.getPinCode());
+               .append("\n PinCode          : ").append(this.getPinCode())
+               .append("\n Type             : ").append(this.getType());
         return builder.toString();
     }
 }

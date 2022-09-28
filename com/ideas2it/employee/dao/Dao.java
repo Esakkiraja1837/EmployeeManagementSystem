@@ -20,11 +20,26 @@ public interface Dao {
     boolean addEmployee(Employee employee);
 
     /**
+     * Save the address details.
+     * @param address details.
+     * @param address details.
+     */
+    boolean addAddress(Address address, int employeeId);
+
+
+    /**
      * Display the employee Details.
      * @param employee.
      * @return Return the EmployeeDetails
      */
     List<Employee> displayEmployee();
+
+    /**
+     * Update address details by employee name,
+     * If name found it update address details else it doesn't.
+     * @param address details.
+     */
+    boolean updateAddress(Address address, int employeeId);
 
     /**
      * update the employee Details.
@@ -38,7 +53,14 @@ public interface Dao {
      * @param employee.
      * @return Return the boolean value.
      */
-    boolean deleteEmployee(String name);
+    boolean deleteEmployee(String firstName);
+
+    /**
+     * search the employee Details.
+     * @param employee name.
+     * @return Return the boolean value.
+     */
+    public Employee searchEmployee(String name);
 }
 
 

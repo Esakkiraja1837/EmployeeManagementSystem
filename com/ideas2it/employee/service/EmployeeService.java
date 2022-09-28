@@ -35,7 +35,7 @@ public interface EmployeeService {
      * @param Employee name
      * @return returns relevent employee details
      */
-    EmployeeDTO searchEmployee(String name);
+    EmployeeDTO searchEmployee(String firstName);
 
     /**
      * Updates the employee detail and returns true if successful.
@@ -51,6 +51,6 @@ public interface EmployeeService {
      * @param employee name
      * @return true if employee details are deleted.
      */
-    boolean deleteEmployee(String name);
+    boolean deleteEmployee(String firstName);
 
 }

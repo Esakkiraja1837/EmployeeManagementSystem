@@ -21,14 +21,17 @@ public class EmployeeMapper {
     public static EmployeeDTO toEmployeeDTO(Employee employee) {
         EmployeeDTO employeeDTO = new EmployeeDTO();
 
-        employeeDTO.setName(employee.getName());
-        employeeDTO.setId(employee.getId());
-        employeeDTO.setAge(employee.getAge());
+        employeeDTO.setFirstName(employee.getFirstName());
+        employeeDTO.setLastName(employee.getLastName());
+        employeeDTO.setEmployeeId(employee.getEmployeeId());
+        employeeDTO.setRole(employee.getRole());
         employeeDTO.setMobileNumber(employee.getMobileNumber());
         employeeDTO.setEmailId(employee.getEmailId());
         employeeDTO.setSalary(employee.getSalary());
         employeeDTO.setAddress(toAddressDTO(employee.getAddress()));
         employeeDTO.setJoiningDate(employee.getJoiningDate());
+        employeeDTO.setDateOfBirth(employee.getDateOfBirth());
+        employeeDTO.setGender(employee.getGender());
 
         return employeeDTO;
     }
@@ -42,14 +45,17 @@ public class EmployeeMapper {
     public static Employee toEmployee(EmployeeDTO employeeDTO) {
         Employee employee = new Employee();
 
-        employee.setName(employeeDTO.getName());
-        employee.setId(employeeDTO.getId());
-        employee.setAge(employeeDTO.getAge());
+        employee.setFirstName(employeeDTO.getFirstName());
+        employee.setLastName(employeeDTO.getLastName());
+        employee.setEmployeeId(employeeDTO.getEmployeeId());
+        employee.setEmployeeId(employeeDTO.getRole());
         employee.setMobileNumber(employeeDTO.getMobileNumber());
         employee.setEmailId(employeeDTO.getEmailId());
         employee.setSalary(employeeDTO.getSalary());
         employee.setAddress(toAddress(employeeDTO.getAddress()));
         employee.setJoiningDate(employeeDTO.getJoiningDate());
+        employee.setDateOfBirth(employeeDTO.getDateOfBirth());
+        employee.setGender(employeeDTO.getGender());
 
         return employee;
 
@@ -64,12 +70,12 @@ public class EmployeeMapper {
     public static AddressDTO toAddressDTO(Address address) {
         AddressDTO addressDTO = new AddressDTO();
 
-        addressDTO.setFlatNo(address.getFlatNo());
-        addressDTO.setStreetName(address.getStreetName());
-        addressDTO.setHomeTown(address.getHomeTown());
-        addressDTO.setDistrict(address.getDistrict());
+        addressDTO.setDoorNo(address.getDoorNo());
+        addressDTO.setStreet(address.getStreet());
+        addressDTO.setCity(address.getCity());
         addressDTO.setState(address.getState());
         addressDTO.setPinCode(address.getPinCode());
+        addressDTO.setType(address.getType());
 
         return addressDTO;
 
@@ -84,12 +90,12 @@ public class EmployeeMapper {
     public static Address toAddress(AddressDTO addressDTO) {
         Address address = new Address();
 
-        address.setFlatNo(addressDTO.getFlatNo());
-        address.setStreetName(addressDTO.getStreetName());
-        address.setHomeTown(addressDTO.getHomeTown());
-        address.setDistrict(addressDTO.getDistrict());
+        address.setDoorNo(addressDTO.getDoorNo());
+        address.setStreet(addressDTO.getStreet());
+        address.setCity(addressDTO.getCity());
         address.setState(addressDTO.getState());
         address.setPinCode(addressDTO.getPinCode());
+        address.setType(addressDTO.getType());
 
         return address;
 

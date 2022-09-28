@@ -11,37 +11,43 @@ import java.time.LocalDate;
  * 13-09-2022.
  */
 public class Employee {
-    private String name; 
-    private int id;
-    private int age;
+    private String firstName;
+    private String lastName;
+    private int employeeId;
+    private String role;
     private long mobileNumber;
     private String emailId;
     private double salary;
     private Address address;
     private LocalDate joiningDate;
+    private LocalDate dateOfBirth;
+    private String gender;
 
     public Employee() {
     }
 
-    public Employee(String name, int id, int age, long mobileNumber, 
-                    String emailId, double salary, Address address,
-                    LocalDate joiningDate) {
-        this.name = name;
-        this.id = id;
-        this.age =  age;
+    public Employee(String firstName, String lastName, int employeeId, String role,
+                    long mobileNumber, String emailId, double salary, Address address,
+                    LocalDate joiningDate, LocalDate dateOfBirth, String gender) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.employeeId = employeeId;
+        this.role = role;
         this.mobileNumber = mobileNumber;
         this.emailId = emailId;
         this.salary = salary;
         this.address = address;
         this.joiningDate = joiningDate;
+        this.dateOfBirth = dateOfBirth;
+        this.gender = gender;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public void setMobileNumber(long mobileNumber) {
@@ -52,8 +58,12 @@ public class Employee {
         this.emailId = emailId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public void setAddress(Address address) {
@@ -68,12 +78,24 @@ public class Employee {
         this.joiningDate = joiningDate;
     }
 
-    public String getName() {
-        return name;
+    public void setDateOfBirth(LocalDate  dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
-    public int getId() {
-        return id;
+    public void setGender(String Gender) {
+        this.gender = gender;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public int getEmployeeId() {
+        return employeeId;
     }
 
     public double getSalary() {
@@ -84,18 +106,26 @@ public class Employee {
         return joiningDate;
     }
 
-    public int  getAge() {
-        return age;
+    public LocalDate  getDateOfBirth() {
+        return dateOfBirth;
     }
+
 
     public String  getEmailId() {
         return emailId;
+    }
+
+    public String  getRole() {
+        return role;
     }
 
     public Address getAddress() {
         return address;
     }
 
+    public String  getGender() {
+        return gender;
+    }
     public long  getMobileNumber() {
         return mobileNumber;
     }
@@ -108,13 +138,16 @@ public class Employee {
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("\n Detail of Employee: \n")
-               .append("\n Name            : ").append(this.getName())
-               .append("\n ID              : ").append(this.getId())
-               .append("\n Age             : ").append(this.getAge())
+               .append("\n First Name      : ").append(this.getFirstName())
+               .append("\n Last Name       : ").append(this.getLastName())
+               .append("\n Employee ID     : ").append(this.getEmployeeId())
+               .append("\n Employee Role   : ").append(this.getRole())
                .append("\n Mobile Number   : ").append(this.getMobileNumber())
                .append("\n Salary          : ").append(this.getSalary())
                .append("\n Email Id        : ").append(this.getEmailId())
                .append("\n Joining Of Date : ").append(this.getJoiningDate())
+               .append("\n Date Of Birth   : ").append(this.getDateOfBirth())
+               .append("\n Gender          : ").append(this.getGender())
                .append(this.getAddress());
         return builder.toString();
 
