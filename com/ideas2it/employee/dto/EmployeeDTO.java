@@ -1,6 +1,9 @@
 package com.ideas2it.employee.dto;
 
+import com.ideas2it.employee.dto.AddressDTO;
+
 import java.time.LocalDate;
+
 
 /**
  * It present employee details.
@@ -62,7 +65,7 @@ public class EmployeeDTO {
         this.emailId = emailId;
     }
 
-    public void setId(int employeeId) {
+    public void setEmployeeId(int employeeId) {
         this.employeeId = employeeId;
     }
 
@@ -82,7 +85,7 @@ public class EmployeeDTO {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public void setGender(String Gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 
@@ -142,7 +145,7 @@ public class EmployeeDTO {
                .append("\n First Name      : ").append(this.getFirstName())
                .append("\n Last Name       : ").append(this.getLastName())
                .append("\n Employee ID     : ").append(this.getEmployeeId())
-               .append("\n Employee Role            : ").append(this.getRole())
+               .append("\n Employee Role   : ").append(this.getRole())
                .append("\n Mobile Number   : ").append(this.getMobileNumber())
                .append("\n Salary          : ").append(this.getSalary())
                .append("\n Email Id        : ").append(this.getEmailId())

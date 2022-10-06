@@ -31,7 +31,7 @@ public class AddressDTO {
         this.type = type;
     }
 
-    public void setDoorNo(String DoorNo) {
+    public void setDoorNo(String doorNo) {
         this.doorNo = doorNo;
     }
 
@@ -55,19 +55,19 @@ public class AddressDTO {
         this.pinCode = pinCode;
     }
 
-    public String  getDoorNo() {
+    public String getDoorNo() {
         return doorNo;
     }
 
-    public String  getStreet() {
+    public String getStreet() {
         return street;
     }
 
-    public String  getCity() {
+    public String getCity() {
         return city;
     }
 
-    public String  getState() {
+    public String getState() {
         return state;
     }
 

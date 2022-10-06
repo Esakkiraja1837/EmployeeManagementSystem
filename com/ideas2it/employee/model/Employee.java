@@ -82,7 +82,7 @@ public class Employee {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public void setGender(String Gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 

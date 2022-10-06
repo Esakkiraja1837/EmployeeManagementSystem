@@ -1,14 +1,14 @@
 package com.ideas2it.employee.mapper;
 
-import com.ideas2it.employee.model.Address;
 import com.ideas2it.employee.dto.AddressDTO;
-import com.ideas2it.employee.model.Employee;
 import com.ideas2it.employee.dto.EmployeeDTO;
+import com.ideas2it.employee.model.Address;
+import com.ideas2it.employee.model.Employee;
+
 
 /*
  * class Convert DTO object to model Object and Model to DTO
  *
-
  */
 public class EmployeeMapper {
 
@@ -32,7 +32,6 @@ public class EmployeeMapper {
         employeeDTO.setJoiningDate(employee.getJoiningDate());
         employeeDTO.setDateOfBirth(employee.getDateOfBirth());
         employeeDTO.setGender(employee.getGender());
-
         return employeeDTO;
     }
 
@@ -48,7 +47,7 @@ public class EmployeeMapper {
         employee.setFirstName(employeeDTO.getFirstName());
         employee.setLastName(employeeDTO.getLastName());
         employee.setEmployeeId(employeeDTO.getEmployeeId());
-        employee.setEmployeeId(employeeDTO.getRole());
+        employee.setRole(employeeDTO.getRole());
         employee.setMobileNumber(employeeDTO.getMobileNumber());
         employee.setEmailId(employeeDTO.getEmailId());
         employee.setSalary(employeeDTO.getSalary());

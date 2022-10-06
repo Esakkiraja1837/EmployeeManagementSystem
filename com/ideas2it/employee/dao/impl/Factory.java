@@ -6,14 +6,21 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;  
 import java.sql.SQLException;
 
+/**
+ * This makes the connection between the database and our application.
+ * From this connection we can manipulate the data in database.
+ * @author  ESAKKIRAJA E.
+ */
 public class Factory {
    private static String databaseURL = "jdbc:mysql://localhost:3306/employee_management_system";
     private static String user = "root";
     private static String password = "1234@";
     private static Connection connection = null;
 
-    private Factory() {}
-
+    //private Factory() {}
+    /**
+     * Connection between the database and java application.
+     */
     public static Connection getConnection() {
         
         try {
@@ -30,6 +37,10 @@ public class Factory {
         return connection;
     }
 
+    /**
+     * Close the opened connection between the database
+     * and java application
+     */
     public static void closeConnection() {
 
        try {

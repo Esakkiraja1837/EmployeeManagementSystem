@@ -31,7 +31,7 @@ public class Address {
         this.type = type;
     }
 
-    public void setDoorNo(String DoorNo) {
+    public void setDoorNo(String doorNo) {
         this.doorNo = doorNo;
     }
 
@@ -56,27 +56,27 @@ public class Address {
     }
 
 
-    public String  getDoorNo() {
+    public String getDoorNo() {
         return doorNo;
     }
 
-    public String  getStreet() {
+    public String getStreet() {
         return street;
     }
 
-    public String  getCity() {
+    public String getCity() {
         return city;
     }
 
-    public String  getState() {
+    public String getState() {
         return state;
     }
 
-    public int  getPinCode() {
+    public int getPinCode() {
         return pinCode;
     }
 
-    public String  getType() {
+    public String getType() {
         return type;
     }
 

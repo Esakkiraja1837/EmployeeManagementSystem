@@ -3,36 +3,51 @@ package com.ideas2it.employee.service.employeeManagement;
 import com.ideas2it.employee.dao.Dao;
 import com.ideas2it.employee.dao.impl.EmployeeDao;
 import com.ideas2it.employee.dto.AddressDTO;
+import com.ideas2it.employee.dto.EmployeeDTO;
+import com.ideas2it.employee.exception.EMSException;
+import com.ideas2it.employee.mapper.EmployeeMapper;
 import com.ideas2it.employee.model.Employee;
 import com.ideas2it.employee.service.EmployeeService;
-import com.ideas2it.employee.dto.EmployeeDTO;
-import com.ideas2it.employee.mapper.EmployeeMapper;
 import com.ideas2it.employee.view.EmployeeView;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Pattern;
 
+
+/**
+ * This Application used to maintain the employee details.
+ * CRUD & Search operations were done in this application.
+ * @author  ESAKKIRAJA E.
+ */
 public class EmployeeManagementService {  
+
     EmployeeDao employeeDao = new EmployeeDao();
+
     EmployeeMapper employeeMapper = new EmployeeMapper();
 
     /**
-     * Get's the value from viewand transfer to service section.
-     *
-     * @return returns true if employee added
+     * {@inheritDoc}
      */
-    public boolean addEmployee(EmployeeDTO employeeDTO) {
+    public boolean addEmployee(EmployeeDTO employeeDTO) throws EMSException {
         return employeeDao.addEmployee(employeeMapper.toEmployee(employeeDTO));
     }
 
     /**
-     * Transfers employee details to be displayed.
-     *
-     * @return the employee details from the service class.
+     * {@inheritDoc}
      */
-    public List<EmployeeDTO> displayEmployee() {
+    public static boolean isValid(String regexPattern, String fieldValue) {
+        return Pattern.matches(regexPattern, fieldValue);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public List<EmployeeDTO> displayEmployee() throws EMSException {
         List<Employee> employeeDetails = employeeDao.displayEmployee();
+
         List<EmployeeDTO> employeeDto = new ArrayList<EmployeeDTO>();
+
         for (int i = 0; i < employeeDetails.size(); i++) {
             Employee employee = employeeDetails.get(i);
             employeeDto.add(employeeMapper.toEmployeeDTO(employee));
@@ -41,28 +56,29 @@ public class EmployeeManagementService {
     }
 
     /**
-     * Transfer's employee details to be updated.
-     * @param employee
-     * @return the employee details from the service class.
+     * {@inheritDoc}
      */
-    public boolean updateEmployee(EmployeeDTO employeeDTO) {
+    public boolean updateEmployee(EmployeeDTO employeeDTO) throws EMSException {
         return employeeDao.updateEmployee(employeeMapper.toEmployee(employeeDTO));
     }
 
     /**
-     * Transfer's true if deleting process is complete.
-     *
-     * @return true if employeeDetails deleted
+     * {@inheritDoc}
      */
-    public boolean deleteEmployee(String firstName) {
-        return employeeDao.deleteEmployee(firstName);
+    public boolean deleteEmployee(int employeeId) throws EMSException {
+        return employeeDao.deleteEmployee(employeeId);
     }
 
-    public EmployeeDTO searchEmployee(String firstName) {
+    /**
+     * {@inheritDoc}
+     */
+    public EmployeeDTO searchEmployee(String firstName) throws EMSException {
         List<EmployeeDTO> employeesDto = displayEmployee();
+
         EmployeeDTO searchEmployeeDto = null;
+
         for (int i = 0; i < employeesDto.size(); i++) {
-            if (employeesDto.get(i).getName().equals(firstName)) {
+            if (employeesDto.get(i).getFirstName().equals(firstName)) {
                 searchEmployeeDto = employeesDto.get(i);
             }
         }

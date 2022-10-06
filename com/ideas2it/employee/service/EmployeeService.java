@@ -2,16 +2,18 @@ package com.ideas2it.employee.service;
 
 import com.ideas2it.employee.dto.AddressDTO;
 import com.ideas2it.employee.dto.EmployeeDTO;
+import com.ideas2it.employee.exception.EMSException;
+
+import java.util.regex.Pattern;
 import java.util.List;
+
 
 /**
  * Interface is used to declare the abstract method to service class
  *
- * 
  */
 public interface EmployeeService {
 
-    
     /**
      * Saves the employee details in above database
      * and return true if the process is successful.
@@ -19,7 +21,10 @@ public interface EmployeeService {
      * @param employee from controller
      * @return Return the boolean value.
      */
-    boolean addEmployee(EmployeeDTO employeeDTO);
+    public boolean addEmployee(EmployeeDTO employeeDTO) throws EMSException;
+
+
+    public boolean isValid(String regexPattern, String fieldValue);
 
     /**
      * Returns EmployeeDetail to be displayed.
@@ -27,7 +32,7 @@ public interface EmployeeService {
      * @param employee
      * @return Returns employee
      */
-    List<EmployeeDTO> displayEmployee();
+    public List<EmployeeDTO> displayEmployee() throws EMSException ;
 
     /**
      * Receives relevent employee details from database.
@@ -35,7 +40,7 @@ public interface EmployeeService {
      * @param Employee name
      * @return returns relevent employee details
      */
-    EmployeeDTO searchEmployee(String firstName);
+    public EmployeeDTO searchEmployee(String firstName) throws EMSException ;
 
     /**
      * Updates the employee detail and returns true if successful.
@@ -43,7 +48,7 @@ public interface EmployeeService {
      * @param employee
      * @return true if employee is updated
      */
-    boolean updateEmployee(EmployeeDTO employeeDTO);
+    public boolean updateEmployee(EmployeeDTO employeeDTO) throws EMSException ;
 
     /**
      * Deletes the employee details and returns true if successful.
@@ -51,6 +56,6 @@ public interface EmployeeService {
      * @param employee name
      * @return true if employee details are deleted.
      */
-    boolean deleteEmployee(String firstName);
+    public boolean deleteEmployee(int employeeId) throws EMSException;
 
 }

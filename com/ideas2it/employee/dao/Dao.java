@@ -1,7 +1,9 @@
 package com.ideas2it.employee.dao;
 
+import com.ideas2it.employee.exception.EMSException;
 import com.ideas2it.employee.model.Address;
 import com.ideas2it.employee.model.Employee;
+
 import java.util.List;
 
 /**
@@ -11,20 +13,19 @@ import java.util.List;
  */
 public interface Dao {  
 
-
     /**
      * save the employee Details.
      * @param employee.
      * @return Return the EmployeeDetails
      */
-    boolean addEmployee(Employee employee);
+    public boolean addEmployee(Employee employee) throws EMSException;
 
     /**
      * Save the address details.
      * @param address details.
      * @param address details.
      */
-    boolean addAddress(Address address, int employeeId);
+    public boolean addAddress(Address address, int employeeId) throws EMSException;
 
 
     /**
@@ -32,35 +33,35 @@ public interface Dao {
      * @param employee.
      * @return Return the EmployeeDetails
      */
-    List<Employee> displayEmployee();
+    public List<Employee> displayEmployee() throws EMSException;
 
     /**
      * Update address details by employee name,
      * If name found it update address details else it doesn't.
      * @param address details.
      */
-    boolean updateAddress(Address address, int employeeId);
+    public boolean updateAddress(Address address, int employeeId) throws EMSException;
 
     /**
      * update the employee Details.
      * @param employee.
      * @return Return the boolean value.
      */ 
-    boolean updateEmployee(Employee employee);
+    public boolean updateEmployee(Employee employee) throws EMSException;
 
     /**
      * Delete the employee Details.
      * @param employee.
      * @return Return the boolean value.
      */
-    boolean deleteEmployee(String firstName);
+    public boolean deleteEmployee(int employeeId) throws EMSException;
 
     /**
      * search the employee Details.
      * @param employee name.
      * @return Return the boolean value.
      */
-    public Employee searchEmployee(String name);
+    public Employee searchEmployee(String name) throws EMSException;
 }
 
 
