@@ -9,9 +9,15 @@ import com.ideas2it.employee.mapper.EmployeeMapper;
 import com.ideas2it.employee.model.Employee;
 import com.ideas2it.employee.service.EmployeeService;
 import com.ideas2it.employee.view.EmployeeView;
+import com.ideas2it.employee.constant.EmployeeManagementConstant;
+import com.ideas2it.employee.util.ValidationUtil;
 
+import java.util.stream.Stream;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDate;
+import java.util.Iterator;
+import java.time.Period;
 
 import java.util.regex.Pattern;
 
@@ -25,6 +31,7 @@ public class EmployeeManagementService {
 
     EmployeeDao employeeDao = new EmployeeDao();
     EmployeeMapper employeeMapper = new EmployeeMapper();
+    ValidationUtil employeeUtil = new ValidationUtil();
 
     /**
      * {@inheritDoc}
@@ -62,7 +69,7 @@ public class EmployeeManagementService {
         return employeeDao.updateEmployee(employeeMapper.toEmployee(employeeDTO));
     }
 
-    /**6
+    /**
      * {@inheritDoc}
      */
     public boolean deleteEmployee(int employeeId) throws EMSException {
@@ -75,12 +82,42 @@ public class EmployeeManagementService {
     public List<EmployeeDTO> searchEmployee(String firstName) throws EMSException {
         List<Employee> employeeDetails = employeeDao.searchEmployee(firstName);
         List<EmployeeDTO> employeeDto = new ArrayList<EmployeeDTO>();
+
         for (int i = 0; i < employeeDetails.size(); i++) {
             Employee employee = employeeDetails.get(i);
             employeeDto.add(employeeMapper.toEmployeeDTO(employee));
         }
         return employeeDto;
-
     }
 
+
+    /**
+     * {@inheritDoc}
+     */
+    public boolean joiningDateValidate(LocalDate dateOfBirth, LocalDate joiningDate) {
+       return employeeUtil.joiningDateValidate(dateOfBirth, joiningDate);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public boolean dateOfBirthValidate(LocalDate dateOfBirth) {
+        return employeeUtil.dateOfBirthValidate(dateOfBirth);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public boolean validateMobileNumber(long mobileNumber) throws EMSException {
+        return (!(displayEmployee().stream().anyMatch(employeeDTO -> String.valueOf
+              (employeeDTO.getMobileNumber()).equals(Long.toString(mobileNumber)))));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public boolean validateEmailId(String emailId) throws EMSException {
+        return (!(displayEmployee().stream().anyMatch
+                (employeeDTO -> employeeDTO.getEmailId().equals(emailId))));
+    }
 }

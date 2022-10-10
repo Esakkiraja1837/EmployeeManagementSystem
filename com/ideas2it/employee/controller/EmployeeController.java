@@ -10,6 +10,8 @@ import com.ideas2it.employee.exception.EMSException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
+import java.time.LocalDate;
+import java.time.Period;
 
 
 /**
@@ -77,4 +79,48 @@ public class EmployeeController {
        
     }
 
+    /**
+     * validate Employee joiningDate.
+     *
+     * @parm employee dateOfBirth,joiningDate.
+     * @return Return value.
+     *
+     */
+    public boolean joiningDateValidate(LocalDate dateOfBirth, LocalDate joiningDate) {
+        return employeeService.joiningDateValidate(dateOfBirth, joiningDate);
+    }
+
+
+    /**
+     * validate Employee DateOfBirth.
+     *
+     * @parm employee dateOfBirth.
+     * @return Return value.
+     *
+     */
+    public boolean dateOfBirthValidate(LocalDate dateOfBirth) {
+        return employeeService.dateOfBirthValidate(dateOfBirth);
+    }
+    
+    /**
+     * validate Employee MobileNumber.
+     *
+     * @parm employee details(mobileNumber).
+     * @return Return value.
+     *
+     */
+    public boolean validateMobileNumber(long mobileNumber) throws EMSException {
+        return employeeService.validateMobileNumber(mobileNumber);
+    }
+
+    /**
+     * validate Employee emailId.
+     *
+     * @parm employee details(emailId).
+     * @return Return value.
+     *
+     */
+    public boolean validateEmailId(String emailId) throws EMSException {
+        return employeeService.validateEmailId(emailId);
+    }
 }

@@ -1,5 +1,7 @@
 package com.ideas2it.employee.dao.impl;
 
+import com.ideas2it.employee.exception.EMSException;
+
 import java.sql.Connection;  
 import java.sql.DriverManager;  
 import java.sql.PreparedStatement;  
@@ -16,7 +18,7 @@ public class Factory {
     private static String user = "root";
     private static String password = "1234@";
     private static Connection connection = null;
-    private static Factory customConnection = null;
+    private static Factory factoryConnection = null;
 
     private Factory() {}
 
@@ -25,30 +27,29 @@ public class Factory {
      * @return customconnection
      */
     public static Factory getFactory() {
-        if (customConnection == null) {
-            customConnection = new Factory();
+        if (factoryConnection == null) {
+            factoryConnection = new Factory();
         }
-        return customConnection;
+        return factoryConnection;
     }
-
-
 
     /**
      * Connection between the database and java application.
      */
-    public Connection getConnection() {
+    public Connection getConnection() throws EMSException {
         
         try {
 
-            if (connection == null || connection.isClosed())
+            if (connection == null || connection.isClosed()) {
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 connection = DriverManager.getConnection(databaseURL, user, password);
+            }
         } catch (ClassNotFoundException e) {
-            System.out.println("Could not find database driver class");
-            e.printStackTrace();
+            throw new EMSException
+            ("ErrorCode 109", "can not Connect Database");
         } catch (SQLException e) {
-            System.out.println("An error occurred. Maybe user/password is invalid");
-            e.printStackTrace();
+            throw new EMSException
+            ("ErrorCode 101", "Error occured in inserting data, Try again");
         }
         return connection;
     }
@@ -57,14 +58,15 @@ public class Factory {
      * Close the opened connection between the database
      * and java application
      */
-    public void closeConnection() {
+    public void closeConnection() throws EMSException {
 
        try {
            if (connection != null) {
                connection.close();
            }
        } catch (SQLException e) {
-           e.printStackTrace();
+            throw new EMSException
+            ("ErrorCode 101", "Error occured in inserting data, Try again");
        }
     }
 }
