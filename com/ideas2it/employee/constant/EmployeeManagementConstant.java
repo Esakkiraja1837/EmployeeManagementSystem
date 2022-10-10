@@ -22,6 +22,6 @@ public class EmployeeManagementConstant {
     public static final String REGEX_EMAILID = "(([a-z0-9]([.][a-z0-9]+)*){4,}[@]{1}[a-z]{2,8}[\\.]([a-z]{3,}([a-z\\.][a-z]{2})*))";
     public static final String REGEX_PINCODE = "([0-9]{6})";
     public static final String REGEX_EMPLOYEEID = "([0-9]{1,9})";
-    public static final String REGEX_DOOR_NUMBER = "^[1-9]*(?:[ -]?(?:[a-zA-Z]{1,2}+|[1-9]*))?$";
+    public static final String REGEX_DOOR_NUMBER = "(([1-9]{1,3})(([a-zA-Z]{1,2})?))";
     public static final String REGEX_ADDRESS = "^[a-zA-Z]{2,15}([ ]?[a-zA-Z]{0,15}){0,}$";
 }

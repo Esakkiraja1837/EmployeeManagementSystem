@@ -150,7 +150,10 @@ public class EmployeeView {
          } while (!isValid);
          return firstName;
     }
-
+    /**
+     * validate Employee Gender.
+     * @return Return gender.
+     */
     public String getGender() {
         boolean isValid;
         String gender;
@@ -188,7 +191,10 @@ public class EmployeeView {
          } while (!isValid);
          return lastName;
     }
-
+    /**
+     * validate Employee role.
+     * @return Return role.
+     */
     public String getRole() {
         boolean isValid;
         String role;
@@ -437,6 +443,10 @@ public class EmployeeView {
          return pinCode;
     }
 
+    /**
+     * validate Employee address doorNo.
+     * @return Return doorNo.
+     */
     public String getDoorNo() {
         boolean isValid;
         String doorNo;
@@ -454,6 +464,10 @@ public class EmployeeView {
          return doorNo;
     }
 
+    /**
+     * validate Employee address street.
+     * @return Return street.
+     */
     public String getStreet() {
         boolean isValid;
         String street;
@@ -471,6 +485,10 @@ public class EmployeeView {
          return street;
     }
 
+    /**
+     * validate Employee address City.
+     * @return Return city.
+     */
     public String getCity() {
         boolean isValid;
         String city;
@@ -488,6 +506,10 @@ public class EmployeeView {
          return city;
     }
 
+    /**
+     * validate Employee address city.
+     * @return Return city.
+     */
     public String getState() {
         boolean isValid;
         String state;
@@ -505,6 +527,10 @@ public class EmployeeView {
          return state;
     }
 
+    /**
+     * validate Employee address type.
+     * @return Return type.
+     */
     public String getType() {
         boolean isValid;
         String type;
