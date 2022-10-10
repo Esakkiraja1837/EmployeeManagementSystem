@@ -15,9 +15,13 @@ public class EmployeeManagementConstant {
     public static final String VALID_INPUT = "Enter valid input";
     public static final String EMPLOYEE_SALARY = "Enter Employee Salary (0.00) : ";
     public static final String EMPLOYEE_ID = "Enter Employee ID: ";
-    public static final String REGEX_SALARY = "([1-9]{1})([0-9]{1,8})((([.])([0-9]{1,2}))?)";
-    public static final String REGEX_NAME = "^[a-zA-Z]{2,20}";
+    public static final String REGEX_SALARY = "([0-9]{3,}([.][0-9]{2}))|([0-9]{3,}?)";
+    public static final String REGEX_CITYSTATE = "([a-zA-Z]{2,20})(([ ]([a-zA-Z]){2,20})?)";
+    public static final String REGEX_NAME = "(([A-Za-z]{2,20})((([ ])([a-zA-Z]){2,20})?){1,4})";
     public static final String REGEX_MOBILENUMBER = "[7-9][0-9]{9}";
-    public static final String REGEX_EMAILID = "(^[a-zA-Z]{1,20}[.\\-_]?[a-zA-Z0-9]{1,20}[@][a-z0-9]{1,20}[a-z0-9]{0,10}[.][a-z]?[a-z]?[.]?[a-z]{1,3}$)";
+    public static final String REGEX_EMAILID = "(([a-z0-9]([.][a-z0-9]+)*){4,}[@]{1}[a-z]{2,8}[\\.]([a-z]{3,}([a-z\\.][a-z]{2})*))";
     public static final String REGEX_PINCODE = "([0-9]{6})";
+    public static final String REGEX_EMPLOYEEID = "([0-9]{1,9})";
+    public static final String REGEX_DOOR_NUMBER = "^[1-9]*(?:[ -]?(?:[a-zA-Z]{1,2}+|[1-9]*))?$";
+    public static final String REGEX_ADDRESS = "^[a-zA-Z]{2,15}([ ]?[a-zA-Z]{0,15}){0,}$";
 }

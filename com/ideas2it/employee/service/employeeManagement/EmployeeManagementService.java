@@ -12,6 +12,7 @@ import com.ideas2it.employee.view.EmployeeView;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import java.util.regex.Pattern;
 
 
@@ -23,7 +24,6 @@ import java.util.regex.Pattern;
 public class EmployeeManagementService {  
 
     EmployeeDao employeeDao = new EmployeeDao();
-
     EmployeeMapper employeeMapper = new EmployeeMapper();
 
     /**
@@ -62,7 +62,7 @@ public class EmployeeManagementService {
         return employeeDao.updateEmployee(employeeMapper.toEmployee(employeeDTO));
     }
 
-    /**
+    /**6
      * {@inheritDoc}
      */
     public boolean deleteEmployee(int employeeId) throws EMSException {
@@ -72,17 +72,15 @@ public class EmployeeManagementService {
     /**
      * {@inheritDoc}
      */
-    public EmployeeDTO searchEmployee(String firstName) throws EMSException {
-        List<EmployeeDTO> employeesDto = displayEmployee();
-
-        EmployeeDTO searchEmployeeDto = null;
-
-        for (int i = 0; i < employeesDto.size(); i++) {
-            if (employeesDto.get(i).getFirstName().equals(firstName)) {
-                searchEmployeeDto = employeesDto.get(i);
-            }
+    public List<EmployeeDTO> searchEmployee(String firstName) throws EMSException {
+        List<Employee> employeeDetails = employeeDao.searchEmployee(firstName);
+        List<EmployeeDTO> employeeDto = new ArrayList<EmployeeDTO>();
+        for (int i = 0; i < employeeDetails.size(); i++) {
+            Employee employee = employeeDetails.get(i);
+            employeeDto.add(employeeMapper.toEmployeeDTO(employee));
         }
-        return searchEmployeeDto;
+        return employeeDto;
+
     }
 
 }

@@ -25,7 +25,7 @@ public interface Dao {
      * @param address details.
      * @param address details.
      */
-    public boolean addAddress(Address address, int employeeId) throws EMSException;
+    public boolean addAddress(List<Address> address, int employeeId) throws EMSException;
 
 
     /**
@@ -40,7 +40,7 @@ public interface Dao {
      * If name found it update address details else it doesn't.
      * @param address details.
      */
-    public boolean updateAddress(Address address, int employeeId) throws EMSException;
+    public boolean updateAddress(List<Address> address, int employeeId) throws EMSException;
 
     /**
      * update the employee Details.
@@ -61,7 +61,7 @@ public interface Dao {
      * @param employee name.
      * @return Return the boolean value.
      */
-    public Employee searchEmployee(String name) throws EMSException;
+    public List<Employee> searchEmployee(String firstName) throws EMSException;
 }
 
 

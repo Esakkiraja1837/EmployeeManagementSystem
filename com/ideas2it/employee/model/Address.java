@@ -18,17 +18,20 @@ public class Address {
     private int pinCode;
     private String type;
 
+
     public Address() { 
     }
 
     public Address(String doorNo, String street, String city,
                    String state, int pinCode, String type) {
+
         this.doorNo = doorNo;
         this.street = street;
         this.city = city;
         this.state = state;
         this.pinCode = pinCode;
         this.type = type;
+
     }
 
     public void setDoorNo(String doorNo) {
@@ -89,6 +92,7 @@ public class Address {
                .append("\n State            : ").append(this.getState())
                .append("\n PinCode          : ").append(this.getPinCode())
                .append("\n Type             : ").append(this.getType());
+
         return builder.toString();
     }
 }

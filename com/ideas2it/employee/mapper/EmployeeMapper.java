@@ -4,6 +4,8 @@ import com.ideas2it.employee.dto.AddressDTO;
 import com.ideas2it.employee.dto.EmployeeDTO;
 import com.ideas2it.employee.model.Address;
 import com.ideas2it.employee.model.Employee;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /*
@@ -20,18 +22,27 @@ public class EmployeeMapper {
      */
     public static EmployeeDTO toEmployeeDTO(Employee employee) {
         EmployeeDTO employeeDTO = new EmployeeDTO();
+        List<AddressDTO> addressDTOs = new ArrayList<AddressDTO>();
 
-        employeeDTO.setFirstName(employee.getFirstName());
-        employeeDTO.setLastName(employee.getLastName());
-        employeeDTO.setEmployeeId(employee.getEmployeeId());
-        employeeDTO.setRole(employee.getRole());
-        employeeDTO.setMobileNumber(employee.getMobileNumber());
-        employeeDTO.setEmailId(employee.getEmailId());
-        employeeDTO.setSalary(employee.getSalary());
-        employeeDTO.setAddress(toAddressDTO(employee.getAddress()));
-        employeeDTO.setJoiningDate(employee.getJoiningDate());
-        employeeDTO.setDateOfBirth(employee.getDateOfBirth());
-        employeeDTO.setGender(employee.getGender());
+        if(null != employee) {
+            employeeDTO.setFirstName(employee.getFirstName());
+            employeeDTO.setLastName(employee.getLastName());
+            employeeDTO.setEmployeeId(employee.getEmployeeId());
+            employeeDTO.setRole(employee.getRole());
+            employeeDTO.setMobileNumber(employee.getMobileNumber());
+            employeeDTO.setEmailId(employee.getEmailId());
+            employeeDTO.setSalary(employee.getSalary());
+
+            if(null != employee.getAddress()) {
+                for (Address addresses : employee.getAddress()) {
+                    addressDTOs.add(toAddressDTO(addresses));
+                 }
+                 employeeDTO.setAddress(addressDTOs);
+            }
+            employeeDTO.setJoiningDate(employee.getJoiningDate());
+            employeeDTO.setDateOfBirth(employee.getDateOfBirth());
+            employeeDTO.setGender(employee.getGender());
+        }
         return employeeDTO;
     }
 
@@ -43,21 +54,28 @@ public class EmployeeMapper {
      */
     public static Employee toEmployee(EmployeeDTO employeeDTO) {
         Employee employee = new Employee();
+        List<Address> addresses = new ArrayList<Address>();
+        if (null != employeeDTO) {
+            employee.setFirstName(employeeDTO.getFirstName());
+            employee.setLastName(employeeDTO.getLastName());
+            employee.setEmployeeId(employeeDTO.getEmployeeId());
+            employee.setRole(employeeDTO.getRole());
+            employee.setMobileNumber(employeeDTO.getMobileNumber());
+            employee.setEmailId(employeeDTO.getEmailId());
+            employee.setSalary(employeeDTO.getSalary());
 
-        employee.setFirstName(employeeDTO.getFirstName());
-        employee.setLastName(employeeDTO.getLastName());
-        employee.setEmployeeId(employeeDTO.getEmployeeId());
-        employee.setRole(employeeDTO.getRole());
-        employee.setMobileNumber(employeeDTO.getMobileNumber());
-        employee.setEmailId(employeeDTO.getEmailId());
-        employee.setSalary(employeeDTO.getSalary());
-        employee.setAddress(toAddress(employeeDTO.getAddress()));
-        employee.setJoiningDate(employeeDTO.getJoiningDate());
-        employee.setDateOfBirth(employeeDTO.getDateOfBirth());
-        employee.setGender(employeeDTO.getGender());
+            if(null != employeeDTO.getAddress()) {
+                for(AddressDTO addresses1 : employeeDTO.getAddress()) {
+                     addresses.add(toAddress(addresses1));
+                }
+                employee.setAddress(addresses);
+            }
 
+            employee.setJoiningDate(employeeDTO.getJoiningDate());
+            employee.setDateOfBirth(employeeDTO.getDateOfBirth());
+            employee.setGender(employeeDTO.getGender());
+        }
         return employee;
-
     }
 
     /*

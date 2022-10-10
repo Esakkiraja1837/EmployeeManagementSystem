@@ -23,7 +23,7 @@ import java.util.List;
  * @author  Esakkiraja.
  */
 public class EmployeeDao implements Dao { 
-
+    Factory customConnection = Factory.getFactory();
 
 
     /**
@@ -33,7 +33,8 @@ public class EmployeeDao implements Dao {
      */
     @Override
     public boolean addEmployee(Employee employee) throws EMSException {
-        Connection connection = Factory.getConnection();
+
+        Connection connection = customConnection.getConnection();
         boolean isAdded = false;
         PreparedStatement preparedStatement = null;
         int count = 0; 
@@ -50,10 +51,10 @@ public class EmployeeDao implements Dao {
             preparedStatement.setDouble(7, employee.getSalary());
             preparedStatement.setDate(8,Date.valueOf(employee.getJoiningDate()));
             preparedStatement.setString(9, employee.getRole());
-
             count = preparedStatement.executeUpdate();
             String queries = ( "select employee_id from employee where email_id = ?");
-            PreparedStatement statement = Factory.getConnection().prepareStatement(queries);
+
+            PreparedStatement statement = connection.prepareStatement(queries);
             statement.setString(1, employee.getEmailId());
             ResultSet resultSet = statement.executeQuery();
             int employeeId = 0;
@@ -66,7 +67,7 @@ public class EmployeeDao implements Dao {
         } catch (SQLException e) {
             throw new EMSException( "ERROR 404", "Error occured in insert data, Try again");    
         }
-        Factory.closeConnection();
+        customConnection.closeConnection();
 
         if(count > 0) {
             isAdded = true;
@@ -82,29 +83,33 @@ public class EmployeeDao implements Dao {
      * @return if employee details added it returns true/false value.
      */
     @Override
-    public boolean addAddress(Address address, int employeeId) throws EMSException {
+    public boolean addAddress(List <Address> address, int employeeId) throws EMSException {
         PreparedStatement preparedStatement = null;
-        Connection connection = Factory.getConnection();
+        Connection connection = customConnection.getConnection();
         boolean isAdded= false;
         int count = 0;
-        String query = "insert into address(employee_id, door_no, street, city, state, pincode, type)"
-                         +" values(?,?,?,?,?,?,?)";
-        try {
-            preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1,employeeId);
-            preparedStatement.setString(2, address.getDoorNo());
-            preparedStatement.setString(3, address.getStreet());
-            preparedStatement.setString(4, address.getCity());
-            preparedStatement.setString(5, address.getState());
-            preparedStatement.setInt(6, address.getPinCode());
-            preparedStatement.setString(7, address.getType());
-            count = preparedStatement.executeUpdate();
 
+        try {
+
+            for(Address addresses : address) {
+                String query = "insert into address(employee_id, door_no, street, city, state, pincode, type)"
+                                                    +" values(?,?,?,?,?,?,?)";
+
+                preparedStatement = connection.prepareStatement(query);
+                preparedStatement.setInt(1,employeeId);
+                preparedStatement.setString(2, addresses.getDoorNo());
+                preparedStatement.setString(3, addresses.getStreet());
+                preparedStatement.setString(4, addresses.getCity());
+                preparedStatement.setString(5, addresses.getState());
+                preparedStatement.setInt(6, addresses.getPinCode());
+                preparedStatement.setString(7, addresses.getType());
+                count = preparedStatement.executeUpdate();
+            }
         } catch (SQLException e) {
             throw new EMSException
             ("ERROR 404", "Error occured in insert data, Try again");
         }
-        Factory.closeConnection();
+        customConnection.closeConnection();
 
         if(count > 0) {
             isAdded = true;
@@ -121,8 +126,8 @@ public class EmployeeDao implements Dao {
     @Override 
     public List<Employee> displayEmployee() throws EMSException {
         List<Employee> employees = new ArrayList();
-        Connection connection = Factory.getConnection();
-         PreparedStatement preparedStatement = null;
+        Connection connection = customConnection.getConnection();
+        PreparedStatement preparedStatement = null;
         String query ="select * from employee,address where employee.employee_id = address.employee_id ";
 
         try {
@@ -141,14 +146,26 @@ public class EmployeeDao implements Dao {
                 LocalDate joiningDate = result.getDate(9).toLocalDate();
                 String role = result.getString(10);
 
-                String doorNo = result.getString(13);
-                String street = result.getString(14);
-                String city = result.getString(15);
-                String state = result.getString(16);
-                int pincode = result.getInt(17);
-                String type = result.getString(18);
+                Statement statement = connection.createStatement();
+                String addressQuery = "select door_no, street, city, state,"
+                                       + "pincode, type from address where "
+                                       + "employee_id = " + employeeId; 
+                ResultSet resultAddress = statement.executeQuery(addressQuery);
+                List<Address> address = new ArrayList();
 
-                Address address = new Address(doorNo, street, city, state, pincode, type);
+                while (resultAddress.next()) {
+                    Address addresses = new Address(); 
+
+                    String doorNo = result.getString(13);
+                    String street = result.getString(14);
+                    String city = result.getString(15);
+                    String state = result.getString(16);
+                    int pincode = result.getInt(17);
+                    String type = result.getString(18);
+
+                    addresses = new Address(doorNo, street, city, state, pincode, type);
+                    address.add(addresses);
+                }
 
                 Employee employee = new Employee(firstName, lastName, employeeId, role,
                                                  mobileNumber, emailId, salary, address,
@@ -159,7 +176,7 @@ public class EmployeeDao implements Dao {
             throw new EMSException("ERROR 405",
                     "Error occured the data, Try again");
         }
-        Factory.closeConnection();
+        customConnection.closeConnection();
         return employees;
     }
 
@@ -171,7 +188,7 @@ public class EmployeeDao implements Dao {
      */ 
     @Override
     public boolean updateEmployee(Employee employee) throws EMSException { 
-        Connection connection = Factory.getConnection();
+        Connection connection = customConnection.getConnection();
         boolean isUpdate = false;
         PreparedStatement preparedStatement = null;
         int count= 0;
@@ -196,7 +213,7 @@ public class EmployeeDao implements Dao {
               throw new EMSException
               ("ERROR 406", "Error occured update the  data, Try again");
         }
-        Factory.closeConnection();
+        customConnection.closeConnection();
         return isUpdate;
     }
 
@@ -206,8 +223,8 @@ public class EmployeeDao implements Dao {
      * @param employeeid from user
      * @return boolean value if update returns true else returns false.
      */
-    public boolean updateAddress(Address address, int employeeId) throws EMSException {
-        Connection connection = Factory.getConnection();
+    public boolean updateAddress(List<Address> address, int employeeId) throws EMSException {
+        Connection connection = customConnection.getConnection();
         boolean isUpdate= false;
         int count = 0;
         PreparedStatement preparedStatement = null;
@@ -217,20 +234,22 @@ public class EmployeeDao implements Dao {
                  .append(" where employee_id = ?");
 
             try {
-                preparedStatement = connection.prepareStatement(query.toString());
-                preparedStatement.setString(1,address.getDoorNo());
-                preparedStatement.setString(2,address.getStreet());
-                preparedStatement.setString(3,address.getCity());
-                preparedStatement.setString(4,address.getState());
-                preparedStatement.setInt(5,address.getPinCode());
-                preparedStatement.setString(6,address.getType());
-                preparedStatement.setInt(7,employeeId);
-                count = preparedStatement.executeUpdate();  
+                for(Address addresses : address) {
+                    preparedStatement = connection.prepareStatement(query.toString());
+                    preparedStatement.setString(1,addresses.getDoorNo());
+                    preparedStatement.setString(2,addresses.getStreet());
+                    preparedStatement.setString(3,addresses.getCity());
+                    preparedStatement.setString(4,addresses.getState());
+                    preparedStatement.setInt(5,addresses.getPinCode());
+                    preparedStatement.setString(6,addresses.getType());
+                    preparedStatement.setInt(7,employeeId);
+                    count = preparedStatement.executeUpdate(); 
+                } 
             } catch (SQLException e) {
                  throw new EMSException
                  ("ERROR 406", "Error occured in update the data, Try again");
             }
-            Factory.closeConnection();
+            customConnection.closeConnection();
             return isUpdate;
     }
 
@@ -240,8 +259,9 @@ public class EmployeeDao implements Dao {
      * @param employeeid from the user.
      * @return boolean value if employee deleted it returns true/false.
      */
+    @Override
     public boolean deleteEmployee(int employeeId) throws EMSException {
-        Connection connection = Factory.getConnection();
+        Connection connection = customConnection.getConnection();
         boolean isDeleted = false;
         int count = 0; 
         PreparedStatement preparedStatement = null;
@@ -256,7 +276,7 @@ public class EmployeeDao implements Dao {
              throw new EMSException
              ("ERROR 407", "Error occured in delete the data, Try again");
         }
-        Factory.closeConnection();
+        customConnection.closeConnection();
 
         if(count > 0) {
             isDeleted = true;
@@ -269,21 +289,24 @@ public class EmployeeDao implements Dao {
      * @param employee name from the user. 
      */
     @Override
-    public Employee searchEmployee(String name) throws EMSException {
-        Connection connection = Factory.getConnection();
+    public List<Employee> searchEmployee(String firstName) throws EMSException {
+        List<Employee> employees = new ArrayList();
+
+        Connection connection = customConnection.getConnection();
         Employee employee = null;
         StringBuilder query = new StringBuilder();
-        query.append("select * from employee , address  where employee.first_name = ")
-             .append("'").append(name).append("'") 
-             .append ("and employee.employee_id = address.employee_id ");
+        query.append("select employee_id, first_name, last_name, gender,")
+             .append(" date_of_birth, mobile_number, email_id,")
+             .append(" salary, date_of_joining, role from employee")
+             .append(" where first_name like '")
+             .append(firstName).append("%'");
 
         try {
             Statement statement = connection.createStatement();
             ResultSet result = statement.executeQuery(query.toString());
-
             while (result.next()) {
                 int employeeId = result.getInt(1);
-                String firstName = result.getString(2);
+                firstName = result.getString(2);
                 String lastName = result.getString(3);
                 String gender = result.getString(4);
                 LocalDate dateOfBirth = result.getDate(5).toLocalDate();
@@ -291,27 +314,42 @@ public class EmployeeDao implements Dao {
                 String emailId = result.getString(7);
                 double salary = result.getDouble(8);
                 LocalDate joiningDate = result.getDate(9).toLocalDate();
-                
                 String role = result.getString(10);
 
-                String doorNo = result.getString(11);
-                String street = result.getString(12);
-                String city = result.getString(13);
-                String state = result.getString(14);
-                int pincode = result.getInt(15);
-                String type = result.getString(16);
+                Statement statement1 = connection.createStatement();
+                String addressQuery = "select door_no, street, city, state," 
+                                      + " pincode, type from address where "
+                                      + " employee_id = " + employeeId;
 
-                Address address = new Address(doorNo, street, city, 
-                                              state, pincode, type);
+                ResultSet resultAddress = statement1.executeQuery(addressQuery);
+                List<Address> addresses = new ArrayList();
 
-                employee = new Employee(firstName,lastName, employeeId,  role,
-                                        mobileNumber, emailId, salary, address,
-                                        joiningDate,  dateOfBirth, gender);
+                while (resultAddress.next()) {
+                    Address addresss = new Address();
+
+                    String doorNo = resultAddress.getString(1);
+                    String street = resultAddress.getString(2);
+                    String city = resultAddress.getString(3);
+                    String state = resultAddress.getString(4);
+                    int pincode = resultAddress.getInt(5);
+                    String type = resultAddress.getString(6);
+
+                    addresss = new Address(doorNo, street, city, 
+                                            state, pincode, type);
+                    addresses.add(addresss);
+                }
+
+                 employee = new Employee(firstName,lastName, employeeId,  role,
+                                         mobileNumber, emailId, salary, addresses,
+                                         joiningDate,  dateOfBirth, gender);
+                 employees.add(employee);
             }
         } catch (SQLException e) {
+e.printStackTrace();
              throw new EMSException("Error occured the data, Try again", "ERROR 408");
         }
-        Factory.closeConnection(); 
-        return employee;
+        customConnection.closeConnection(); 
+
+        return employees;
     }
 }

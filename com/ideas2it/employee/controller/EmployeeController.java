@@ -72,8 +72,9 @@ public class EmployeeController {
      * @param Employee name
      * @return Returns employeedetails.
      */
-    public EmployeeDTO searchEmployee(String firstName) throws EMSException {
+    public List<EmployeeDTO> searchEmployee(String firstName) throws EMSException {
         return employeeService.searchEmployee(firstName);
+       
     }
 
 }

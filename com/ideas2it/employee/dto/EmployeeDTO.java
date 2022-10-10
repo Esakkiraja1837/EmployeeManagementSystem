@@ -3,6 +3,8 @@ package com.ideas2it.employee.dto;
 import com.ideas2it.employee.dto.AddressDTO;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.ArrayList;
 
 
 /**
@@ -20,7 +22,7 @@ public class EmployeeDTO {
     private long mobileNumber;
     private String emailId;
     private double salary;
-    private AddressDTO addressDTO;
+    private List<AddressDTO> address;
     private LocalDate joiningDate;
     private LocalDate dateOfBirth;
     private String gender;
@@ -30,7 +32,7 @@ public class EmployeeDTO {
 
     public EmployeeDTO(String firstName, String lastName, int employeeId,
                        String role, long mobileNumber,String emailId,
-                       double salary, AddressDTO addressDTO,
+                       double salary, List<AddressDTO> address,
                        LocalDate joiningDate, LocalDate dateOfBirth, String gender) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -39,7 +41,7 @@ public class EmployeeDTO {
         this.mobileNumber = mobileNumber;
         this.emailId = emailId;
         this.salary  = salary;
-        this.addressDTO = addressDTO;
+        this.address = address;
         this.joiningDate = joiningDate;
         this.dateOfBirth = dateOfBirth;
         this.gender = gender; 
@@ -69,8 +71,8 @@ public class EmployeeDTO {
         this.employeeId = employeeId;
     }
 
-    public void setAddress(AddressDTO addressDTO) {
-        this.addressDTO = addressDTO;
+    public void setAddress(List<AddressDTO> address) {
+        this.address = address;
     }
 
     public void setSalary(double salary) {
@@ -125,8 +127,8 @@ public class EmployeeDTO {
         return emailId;
     }
 
-    public AddressDTO getAddress() {
-        return addressDTO;
+    public List<AddressDTO> getAddress() {
+        return address;
     }
 
     public long  getMobileNumber() {

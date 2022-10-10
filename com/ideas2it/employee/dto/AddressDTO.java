@@ -23,12 +23,15 @@ public class AddressDTO {
 
     public AddressDTO(String doorNo, String street, String city,
                       String state, int pinCode, String type) {
+
         this.doorNo = doorNo;
         this.street = street;
         this.city = city;
         this.state = state;
         this.pinCode = pinCode;
         this.type = type;
+
+
     }
 
     public void setDoorNo(String doorNo) {

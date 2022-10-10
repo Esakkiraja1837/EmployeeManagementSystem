@@ -12,18 +12,34 @@ import java.sql.SQLException;
  * @author  ESAKKIRAJA E.
  */
 public class Factory {
-   private static String databaseURL = "jdbc:mysql://localhost:3306/employee_management_system";
+    private static String databaseURL = "jdbc:mysql://localhost:3306/employee_management_system";
     private static String user = "root";
     private static String password = "1234@";
     private static Connection connection = null;
+    private static Factory customConnection = null;
 
-    //private Factory() {}
+    private Factory() {}
+
+    /**
+     * This used to call the connection between the database and application
+     * @return customconnection
+     */
+    public static Factory getFactory() {
+        if (customConnection == null) {
+            customConnection = new Factory();
+        }
+        return customConnection;
+    }
+
+
+
     /**
      * Connection between the database and java application.
      */
-    public static Connection getConnection() {
+    public Connection getConnection() {
         
         try {
+
             if (connection == null || connection.isClosed())
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 connection = DriverManager.getConnection(databaseURL, user, password);
@@ -41,7 +57,7 @@ public class Factory {
      * Close the opened connection between the database
      * and java application
      */
-    public static void closeConnection() {
+    public void closeConnection() {
 
        try {
            if (connection != null) {

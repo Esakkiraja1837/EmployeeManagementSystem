@@ -23,7 +23,13 @@ public interface EmployeeService {
      */
     public boolean addEmployee(EmployeeDTO employeeDTO) throws EMSException;
 
-
+    /**
+     * Compares if the detail matches the expectation
+     * and return true if it matches.
+     * 
+     * @param employee details
+     * @return Return the boolean value.
+     */
     public boolean isValid(String regexPattern, String fieldValue);
 
     /**
@@ -32,7 +38,7 @@ public interface EmployeeService {
      * @param employee
      * @return Returns employee
      */
-    public List<EmployeeDTO> displayEmployee() throws EMSException ;
+    public List<EmployeeDTO> displayEmployee() throws EMSException;
 
     /**
      * Receives relevent employee details from database.
@@ -40,7 +46,7 @@ public interface EmployeeService {
      * @param Employee name
      * @return returns relevent employee details
      */
-    public EmployeeDTO searchEmployee(String firstName) throws EMSException ;
+    public List<EmployeeDTO> searchEmployee(String firstName) throws EMSException;
 
     /**
      * Updates the employee detail and returns true if successful.
@@ -48,7 +54,7 @@ public interface EmployeeService {
      * @param employee
      * @return true if employee is updated
      */
-    public boolean updateEmployee(EmployeeDTO employeeDTO) throws EMSException ;
+    public boolean updateEmployee(EmployeeDTO employeeDTO) throws EMSException;
 
     /**
      * Deletes the employee details and returns true if successful.

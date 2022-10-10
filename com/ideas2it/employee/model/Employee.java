@@ -2,6 +2,8 @@ package com.ideas2it.employee.model;
 
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.ArrayList;
 
 /**
  * It present employee details.
@@ -18,7 +20,7 @@ public class Employee {
     private long mobileNumber;
     private String emailId;
     private double salary;
-    private Address address;
+    private List<Address> address;
     private LocalDate joiningDate;
     private LocalDate dateOfBirth;
     private String gender;
@@ -27,7 +29,7 @@ public class Employee {
     }
 
     public Employee(String firstName, String lastName, int employeeId, String role,
-                    long mobileNumber, String emailId, double salary, Address address,
+                    long mobileNumber, String emailId, double salary, List<Address> address,
                     LocalDate joiningDate, LocalDate dateOfBirth, String gender) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -66,7 +68,7 @@ public class Employee {
         this.role = role;
     }
 
-    public void setAddress(Address address) {
+    public void setAddress(List<Address> address) {
         this.address = address;
     }
 
@@ -119,7 +121,7 @@ public class Employee {
         return role;
     }
 
-    public Address getAddress() {
+    public List<Address> getAddress() {
         return address;
     }
 
