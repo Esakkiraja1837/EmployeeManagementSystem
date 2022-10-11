@@ -1,9 +1,11 @@
-package com.ideas2it.employee.model;
+package com.ideas2it.employee.dto;
 
+import com.ideas2it.employee.dto.AddressDTO;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ArrayList;
+
 
 /**
  * It present employee details.
@@ -12,36 +14,37 @@ import java.util.ArrayList;
  * @author  ESAKKIRAJA E
  * 13-09-2022.
  */
-public class Employee {
-    private String firstName;
+public class EmployeeDTO {
+    private String firstName; 
     private String lastName;
     private int employeeId;
     private String role;
     private long mobileNumber;
     private String emailId;
     private double salary;
-    private List<Address> address;
+    private List<AddressDTO> address;
     private LocalDate joiningDate;
     private LocalDate dateOfBirth;
     private String gender;
 
-    public Employee() {
+    public EmployeeDTO() {
     }
 
-    public Employee(String firstName, String lastName, int employeeId, String role,
-                    long mobileNumber, String emailId, double salary, List<Address> address,
-                    LocalDate joiningDate, LocalDate dateOfBirth, String gender) {
+    public EmployeeDTO(String firstName, String lastName, int employeeId,
+                       String role, long mobileNumber,String emailId,
+                       double salary, List<AddressDTO> address,
+                       LocalDate joiningDate, LocalDate dateOfBirth, String gender) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.employeeId = employeeId;
         this.role = role;
         this.mobileNumber = mobileNumber;
         this.emailId = emailId;
-        this.salary = salary;
+        this.salary  = salary;
         this.address = address;
         this.joiningDate = joiningDate;
         this.dateOfBirth = dateOfBirth;
-        this.gender = gender;
+        this.gender = gender; 
     }
 
     public void setFirstName(String firstName) {
@@ -50,6 +53,10 @@ public class Employee {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public void setMobileNumber(long mobileNumber) {
@@ -64,11 +71,7 @@ public class Employee {
         this.employeeId = employeeId;
     }
 
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public void setAddress(List<Address> address) {
+    public void setAddress(List<AddressDTO> address) {
         this.address = address;
     }
 
@@ -112,25 +115,26 @@ public class Employee {
         return dateOfBirth;
     }
 
-
-    public String  getEmailId() {
-        return emailId;
-    }
-
     public String  getRole() {
         return role;
-    }
-
-    public List<Address> getAddress() {
-        return address;
     }
 
     public String  getGender() {
         return gender;
     }
+
+    public String  getEmailId() {
+        return emailId;
+    }
+
+    public List<AddressDTO> getAddress() {
+        return address;
+    }
+
     public long  getMobileNumber() {
         return mobileNumber;
     }
+
 
     /**
      * overiding toString() Method.

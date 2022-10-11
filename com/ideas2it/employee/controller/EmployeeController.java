@@ -1,58 +1,80 @@
 package com.ideas2it.employee.controller;
 
-import com.ideas2it.employee.model.Address;
-import com.ideas2it.employee.model.Employee;
-import com.ideas2it.employee.service.EmployeeManagement;
-import com.ideas2it.employee.service.impl.EmployeeManagementService;
+import com.ideas2it.employee.dto.AddressDTO;
+import com.ideas2it.employee.dto.EmployeeDTO;
+import com.ideas2it.employee.service.EmployeeService;
+import com.ideas2it.employee.service.employeeManagement.EmployeeManagementService;
 import com.ideas2it.employee.view.EmployeeView;
+import com.ideas2it.employee.exception.EMSException;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Pattern;
 
-public class EmployeeController {  
-    EmployeeManagementService employeeManagementService = new EmployeeManagementService();
+
+/**
+ * Transfers employee details.
+ *
+ * @author  ESAKKIRAJA E.
+ */
+public class EmployeeController { 
+ 
+    EmployeeManagementService employeeService = new EmployeeManagementService();
 
     /**
-     * This method used to get the value from view and transfer the value
-     * to service section.
-     * @param employee object parameter is passed by controller
-     * @return the employeeDeatil from the service class.
-     * 13-09-2022.
+     * Get's the value from view and transfer to service section.
+     *
+     * @return returns true 
      */
-    public boolean addEmployee(Employee employee) {
-        return employeeManagementService.addEmployee(employee);
+    public boolean addEmployee(EmployeeDTO employeeDTO) throws EMSException{
+        return employeeService.addEmployee(employeeDTO);
+    }
+
+   /**
+     * Transfers employee details & validate pattern.
+     *
+     * @return the value
+     */
+    public boolean isValid(String regexPattern, String fieldValue) {
+        return employeeService.isValid(regexPattern, fieldValue);
     }
 
     /**
-     * This method used to return the value.
-     * @param employee object parameter is passed by controller.
-     * @return the employeeDeatil from the service class.
-     * 
+     * Transfers employee details.
+     *
+     * @return the employee details.
      */
-    public List<Employee> displayEmployee() {
-        return employeeManagementService.displayEmployee();
+    public List<EmployeeDTO> displayEmployee() throws EMSException {
+        return employeeService.displayEmployee();
     }
 
     /**
-     * This method used to return the value.
-     * @param employee object parameter is passed by controller
-     * @return the employeeDeatil from the service class.
+     * Transfer's employee details to be updated.
+     * @param employeeDTO
+     * @return the employee details.
      */
-    public boolean updateEmployee(Employee employee) {
-        return employeeManagementService.updateEmployee(employee);
+    public boolean updateEmployee(EmployeeDTO employeeDTO) throws EMSException {
+        return employeeService.updateEmployee(employeeDTO);
     }
 
     /**
-     * This method used to return the value.
-     * @param employee name parameter is passed by controller.
-     * @return the employeeDeatil from the service class.
+     * Transfer's true if deleting process is complete.
+     *
+     * @return true if employee is deleted
      */
-    public boolean deleteEmployee(String name) {
-        return employeeManagementService.deleteEmployee(name);
+    public boolean removeEmployee(int employeeId) throws EMSException {
+        return employeeService.deleteEmployee(employeeId);
     }
 
-    public Employee searchEmployee(String name) {
-        return employeeManagementService.searchEmployee(name);
+    /**
+     * Receives relevent employee details from database.
+     *
+     * @param Employee name
+     * @return Returns employeedetails.
+     */
+    public List<EmployeeDTO> searchEmployee(String firstName) throws EMSException {
+        return employeeService.searchEmployee(firstName);
+       
     }
 
 }
