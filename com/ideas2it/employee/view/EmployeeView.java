@@ -125,7 +125,6 @@ public class EmployeeView {
            System.out.println(e.getMessage() + " " +e.getErrorCode());
         }
 
-
     }
 
 
@@ -151,7 +150,6 @@ public class EmployeeView {
      * Display the saved employeeDetails.
      */
     public void displayEmployee() {
-
         try {
             List<EmployeeDTO> employeesDetail = employeeController.
                                                 displayEmployee();
