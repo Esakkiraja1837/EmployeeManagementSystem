@@ -24,7 +24,7 @@ public class EmployeeMapper {
         EmployeeDTO employeeDTO = new EmployeeDTO();
         List<AddressDTO> addressDTOs = new ArrayList<AddressDTO>();
 
-        if(null != employee) {
+        if (null != employee) {
             employeeDTO.setFirstName(employee.getFirstName());
             employeeDTO.setLastName(employee.getLastName());
             employeeDTO.setEmployeeId(employee.getEmployeeId());
@@ -55,6 +55,7 @@ public class EmployeeMapper {
     public static Employee toEmployee(EmployeeDTO employeeDTO) {
         Employee employee = new Employee();
         List<Address> addresses = new ArrayList<Address>();
+
         if (null != employeeDTO) {
             employee.setFirstName(employeeDTO.getFirstName());
             employee.setLastName(employeeDTO.getLastName());
@@ -64,13 +65,13 @@ public class EmployeeMapper {
             employee.setEmailId(employeeDTO.getEmailId());
             employee.setSalary(employeeDTO.getSalary());
 
-            if(null != employeeDTO.getAddress()) {
+            if (null != employeeDTO.getAddress()) {
+
                 for(AddressDTO addresses1 : employeeDTO.getAddress()) {
                      addresses.add(toAddress(addresses1));
                 }
                 employee.setAddress(addresses);
             }
-
             employee.setJoiningDate(employeeDTO.getJoiningDate());
             employee.setDateOfBirth(employeeDTO.getDateOfBirth());
             employee.setGender(employeeDTO.getGender());
@@ -95,7 +96,6 @@ public class EmployeeMapper {
         addressDTO.setType(address.getType());
 
         return addressDTO;
-
     }
 
     /*
@@ -115,7 +115,5 @@ public class EmployeeMapper {
         address.setType(addressDTO.getType());
 
         return address;
-
     }
-
 }

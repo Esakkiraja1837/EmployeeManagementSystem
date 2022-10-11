@@ -23,7 +23,7 @@ import java.util.List;
  * @author  Esakkiraja.
  */
 public class EmployeeDao implements Dao { 
-    Factory customConnection = Factory.getFactory();
+    Factory factoryConnection = Factory.getFactory();
 
 
     /**
@@ -34,7 +34,7 @@ public class EmployeeDao implements Dao {
     @Override
     public boolean addEmployee(Employee employee) throws EMSException {
 
-        Connection connection = customConnection.getConnection();
+        Connection connection = factoryConnection.getConnection();
         boolean isAdded = false;
         PreparedStatement preparedStatement = null;
         int count = 0; 
@@ -66,8 +66,9 @@ public class EmployeeDao implements Dao {
 
         } catch (SQLException e) {
             throw new EMSException( "ERROR 404", "Error occured in insert data, Try again");    
+        } finally {
+            factoryConnection.closeConnection();
         }
-        customConnection.closeConnection();
 
         if(count > 0) {
             isAdded = true;
@@ -85,7 +86,7 @@ public class EmployeeDao implements Dao {
     @Override
     public boolean addAddress(List <Address> address, int employeeId) throws EMSException {
         PreparedStatement preparedStatement = null;
-        Connection connection = customConnection.getConnection();
+        Connection connection = factoryConnection.getConnection();
         boolean isAdded= false;
         int count = 0;
 
@@ -108,8 +109,9 @@ public class EmployeeDao implements Dao {
         } catch (SQLException e) {
             throw new EMSException
             ("ERROR 404", "Error occured in insert data, Try again");
+        } finally {
+            factoryConnection.closeConnection();
         }
-        customConnection.closeConnection();
 
         if(count > 0) {
             isAdded = true;
@@ -126,7 +128,7 @@ public class EmployeeDao implements Dao {
     @Override 
     public List<Employee> displayEmployee() throws EMSException {
         List<Employee> employees = new ArrayList();
-        Connection connection = customConnection.getConnection();
+        Connection connection = factoryConnection.getConnection();
         PreparedStatement preparedStatement = null;
         String query ="select * from employee,address where employee.employee_id = address.employee_id ";
 
@@ -175,8 +177,9 @@ public class EmployeeDao implements Dao {
         } catch (SQLException e) {
             throw new EMSException("ERROR 405",
                     "Error occured the data, Try again");
+        } finally {
+            factoryConnection.closeConnection();
         }
-        customConnection.closeConnection();
         return employees;
     }
 
@@ -188,7 +191,7 @@ public class EmployeeDao implements Dao {
      */ 
     @Override
     public boolean updateEmployee(Employee employee) throws EMSException { 
-        Connection connection = customConnection.getConnection();
+        Connection connection = factoryConnection.getConnection();
         boolean isUpdate = false;
         PreparedStatement preparedStatement = null;
         int count= 0;
@@ -212,8 +215,9 @@ public class EmployeeDao implements Dao {
         } catch (SQLException e) {
               throw new EMSException
               ("ERROR 406", "Error occured update the  data, Try again");
+        } finally {
+            factoryConnection.closeConnection();
         }
-        customConnection.closeConnection();
         return isUpdate;
     }
 
@@ -224,7 +228,7 @@ public class EmployeeDao implements Dao {
      * @return boolean value if update returns true else returns false.
      */
     public boolean updateAddress(List<Address> address, int employeeId) throws EMSException {
-        Connection connection = customConnection.getConnection();
+        Connection connection = factoryConnection.getConnection();
         boolean isUpdate= false;
         int count = 0;
         PreparedStatement preparedStatement = null;
@@ -248,8 +252,9 @@ public class EmployeeDao implements Dao {
             } catch (SQLException e) {
                  throw new EMSException
                  ("ERROR 406", "Error occured in update the data, Try again");
-            }
-            customConnection.closeConnection();
+        } finally {
+            factoryConnection.closeConnection();
+        }
             return isUpdate;
     }
 
@@ -261,7 +266,7 @@ public class EmployeeDao implements Dao {
      */
     @Override
     public boolean deleteEmployee(int employeeId) throws EMSException {
-        Connection connection = customConnection.getConnection();
+        Connection connection = factoryConnection.getConnection();
         boolean isDeleted = false;
         int count = 0; 
         PreparedStatement preparedStatement = null;
@@ -275,8 +280,9 @@ public class EmployeeDao implements Dao {
         } catch (SQLException e) {
              throw new EMSException
              ("ERROR 407", "Error occured in delete the data, Try again");
+        } finally {
+            factoryConnection.closeConnection();
         }
-        customConnection.closeConnection();
 
         if(count > 0) {
             isDeleted = true;
@@ -292,7 +298,7 @@ public class EmployeeDao implements Dao {
     public List<Employee> searchEmployee(String firstName) throws EMSException {
         List<Employee> employees = new ArrayList();
 
-        Connection connection = customConnection.getConnection();
+        Connection connection = factoryConnection.getConnection();
         Employee employee = null;
         StringBuilder query = new StringBuilder();
         query.append("select employee_id, first_name, last_name, gender,")
@@ -345,10 +351,10 @@ public class EmployeeDao implements Dao {
                  employees.add(employee);
             }
         } catch (SQLException e) {
-e.printStackTrace();
              throw new EMSException("Error occured the data, Try again", "ERROR 408");
+        } finally {
+            factoryConnection.closeConnection();
         }
-        customConnection.closeConnection(); 
 
         return employees;
     }

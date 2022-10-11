@@ -6,6 +6,8 @@ import com.ideas2it.employee.exception.EMSException;
 
 import java.util.regex.Pattern;
 import java.util.List;
+import java.time.LocalDate;
+import java.time.Period;
 
 
 /**
@@ -64,4 +66,38 @@ public interface EmployeeService {
      */
     public boolean deleteEmployee(int employeeId) throws EMSException;
 
+    /**
+     * validate the employee joiningDate
+     * and return true if it matches.
+     * 
+     * @return Return the boolean value.
+     */
+    public boolean joiningDateValidate(LocalDate dateOfBirth, LocalDate joiningDate);
+
+
+
+    /**
+     * validate the employee dateOfBirth.
+     * and return true if it matches.
+     * 
+     * @return Return the boolean value.
+     */
+    public boolean dateOfBirthValidate(LocalDate dateOfBirth);
+
+    /**
+     * validate the employee mobileNumber.
+     * and return true if it matches.
+     * 
+     * @return Return the boolean value.
+     */
+    public boolean validateMobileNumber(long mobileNumber) throws EMSException;
+
+
+    /**
+     * validate the employee emailId.
+     * and return true if it matches.
+     * 
+     * @return Return the boolean value.
+     */
+    public boolean validateEmailId(String emailId) throws EMSException;
 }
