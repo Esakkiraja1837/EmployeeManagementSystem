@@ -46,10 +46,10 @@ public class Factory {
             }
         } catch (ClassNotFoundException e) {
             throw new EMSException
-            ("ErrorCode 109", "can not Connect Database");
+            ("ErrorCode 107", "Error occured can not find connection, Try again");
         } catch (SQLException e) {
             throw new EMSException
-            ("ErrorCode 101", "Error occured in inserting data, Try again");
+            ("ErrorCode 107", "Error occured can not find connection, Try again");
         }
         return connection;
     }
@@ -66,7 +66,7 @@ public class Factory {
            }
        } catch (SQLException e) {
             throw new EMSException
-            ("ErrorCode 101", "Error occured in inserting data, Try again");
+            ("ErrorCode 107", "Error occured can not find connection, Try again");
        }
     }
 }

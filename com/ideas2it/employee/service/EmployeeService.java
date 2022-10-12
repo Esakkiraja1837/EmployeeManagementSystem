@@ -72,7 +72,7 @@ public interface EmployeeService {
      * 
      * @return Return the boolean value.
      */
-    public boolean joiningDateValidate(LocalDate dateOfBirth, LocalDate joiningDate);
+    public boolean validateJoiningDate(LocalDate dateOfBirth, LocalDate joiningDate);
 
 
 
@@ -82,7 +82,7 @@ public interface EmployeeService {
      * 
      * @return Return the boolean value.
      */
-    public boolean dateOfBirthValidate(LocalDate dateOfBirth);
+    public boolean validateDateOfBirth(LocalDate dateOfBirth);
 
     /**
      * validate the employee mobileNumber.

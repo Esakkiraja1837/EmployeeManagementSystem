@@ -86,8 +86,8 @@ public class EmployeeController {
      * @return Return value.
      *
      */
-    public boolean joiningDateValidate(LocalDate dateOfBirth, LocalDate joiningDate) {
-        return employeeService.joiningDateValidate(dateOfBirth, joiningDate);
+    public boolean validateJoiningDate(LocalDate dateOfBirth, LocalDate joiningDate) {
+        return employeeService.validateJoiningDate(dateOfBirth, joiningDate);
     }
 
 
@@ -98,8 +98,8 @@ public class EmployeeController {
      * @return Return value.
      *
      */
-    public boolean dateOfBirthValidate(LocalDate dateOfBirth) {
-        return employeeService.dateOfBirthValidate(dateOfBirth);
+    public boolean validateDateOfBirth(LocalDate dateOfBirth) {
+        return employeeService.validateDateOfBirth(dateOfBirth);
     }
     
     /**
