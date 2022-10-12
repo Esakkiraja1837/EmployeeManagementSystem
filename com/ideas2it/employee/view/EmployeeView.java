@@ -132,7 +132,7 @@ public class EmployeeView {
                 System.out.println("Employee details can not stored.");
             }
         } catch (EMSException e) {
-           logger.error(e.getErrorCode());
+           logger.error("Employee Deatils not Created");
            System.out.println(e.getMessage() + " " + e.getErrorCode());
         }
 
@@ -175,11 +175,11 @@ public class EmployeeView {
                     System.out.println(employeeDTO.toString());
                 }
             } else {
-                logger.info("Empty data...");
+                logger.info("Can not found the employeeDetails");
                 System.out.println("Empty data...");
             }
         } catch (EMSException e) {
-              logger.error(e.getErrorCode());
+              logger.error("Can not found the employeeDetails");
               System.out.println(e.getMessage() + " " + e.getErrorCode());
         }
     }
@@ -223,7 +223,7 @@ public class EmployeeView {
                 System.out.println("Not Update the Employee Details");
             }
         } catch (EMSException e) {
-           logger.error(e.getErrorCode());
+           logger.error("Employee Detail can not updated");
            System.out.println(e.getMessage() + " " + e.getErrorCode());
         }
     }
@@ -245,7 +245,7 @@ public class EmployeeView {
                 System.out.println("Employee Details not deleted");
             }
         } catch (EMSException e) {
-           logger.error(e.getErrorCode());
+           logger.error("Employee Details Not found" + "Employee ID :" + employeeId);
            System.out.println(e.getMessage() + " " + e.getErrorCode());
         }
     }
@@ -269,11 +269,11 @@ public class EmployeeView {
                     System.out.println(employeeDTO);
                 }
             } else {
-                logger.info("Employee Details Not found");
-                System.out.println("The Employee Detail Not found ");
+                logger.info("Employee Details Not found" + "First Name :" + firstName); 
+                System.out.println("The Employee Detail Not found " + firstName);
             }
         } catch (EMSException e) {
-           logger.info(e.getErrorCode());
+           logger.info("The Employee Detail Not found" + "First Name :" + firstName);
            System.out.println(e.getMessage() + " " + e.getErrorCode());
         }
     }
@@ -291,7 +291,7 @@ public class EmployeeView {
                 isValid = true;
 
             } else if (choice .equals("N") || choice.equals("n")) {
-                System.out.println("Employee can't second address");
+                System.out.println("Employee can't Second address");
                 isValid = true;
             } else {
                 System.out.println("Invalid choice");

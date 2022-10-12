@@ -2,6 +2,9 @@ package com.ideas2it.employee.dao.impl;
 
 import com.ideas2it.employee.exception.EMSException;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.sql.Connection;  
 import java.sql.DriverManager;  
 import java.sql.PreparedStatement;  
@@ -19,6 +22,7 @@ public class Factory {
     private static String password = "1234@";
     private static Connection connection = null;
     private static Factory factoryConnection = null;
+    private static final Logger logger = LogManager.getLogger(Factory.class);
 
     private Factory() {}
 
@@ -45,9 +49,11 @@ public class Factory {
                 connection = DriverManager.getConnection(databaseURL, user, password);
             }
         } catch (ClassNotFoundException e) {
+            logger.fatal("No connection found");
             throw new EMSException
             ("ErrorCode 107", "Error occured can not find connection, Try again");
         } catch (SQLException e) {
+            logger.fatal("Connection can not found");
             throw new EMSException
             ("ErrorCode 107", "Error occured can not find connection, Try again");
         }
@@ -65,6 +71,7 @@ public class Factory {
                connection.close();
            }
        } catch (SQLException e) {
+            logger.fatal("Connection can not Disconnected");
             throw new EMSException
             ("ErrorCode 107", "Error occured can not find connection, Try again");
        }

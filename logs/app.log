@@ -1,0 +1,16 @@
+2022-10-13 10:03:18,756 INFO c.i.e.d.i.EmployeeDao com.ideas2it.employee.dao.impl.EmployeeDao.addEmployee(EmployeeDao.java:79) Employee Details created Employee Id :35
+2022-10-13 10:03:18,768 INFO c.i.e.v.EmployeeView com.ideas2it.employee.view.EmployeeView.createEmployee(EmployeeView.java:128) Employee details stored
+2022-10-13 10:05:18,103 WARN c.i.e.v.EmployeeView com.ideas2it.employee.view.EmployeeView.chooseOption(EmployeeView.java:89) Invalid input... Try again
+2022-10-13 10:05:34,835 INFO c.i.e.v.EmployeeView com.ideas2it.employee.view.EmployeeView.deleteEmployee(EmployeeView.java:241) Employee Details Deleted
+2022-10-13 10:06:32,265 INFO c.i.e.v.EmployeeView com.ideas2it.employee.view.EmployeeView.searchEmployee(EmployeeView.java:272) Employee Details Not foundbvc
+2022-10-13 10:07:41,938 INFO c.i.e.v.EmployeeView com.ideas2it.employee.view.EmployeeView.searchEmployee(EmployeeView.java:272) Employee Details Not foundvbc
+2022-10-13 10:15:34,646 INFO c.i.e.v.EmployeeView com.ideas2it.employee.view.EmployeeView.searchEmployee(EmployeeView.java:272) Employee Details Not foundvbv
+2022-10-13 10:37:00,758 INFO c.i.e.v.EmployeeView com.ideas2it.employee.view.EmployeeView.searchEmployee(EmployeeView.java:272) Employee Details Not foundcvb
+2022-10-13 14:31:38,145 INFO c.i.e.d.i.EmployeeDao com.ideas2it.employee.dao.impl.EmployeeDao.addEmployee(EmployeeDao.java:79) Employee Details created Employee Id :36
+2022-10-13 14:31:38,150 INFO c.i.e.v.EmployeeView com.ideas2it.employee.view.EmployeeView.createEmployee(EmployeeView.java:128) Employee details stored
+2022-10-13 14:32:39,237 INFO c.i.e.v.EmployeeView com.ideas2it.employee.view.EmployeeView.deleteEmployee(EmployeeView.java:244) Employee Details Not Deleted
+2022-10-13 14:32:44,080 INFO c.i.e.v.EmployeeView com.ideas2it.employee.view.EmployeeView.deleteEmployee(EmployeeView.java:241) Employee Details Deleted
+2022-10-13 14:33:00,070 INFO c.i.e.v.EmployeeView com.ideas2it.employee.view.EmployeeView.searchEmployee(EmployeeView.java:272) Employee Details Not foundFirst Name :ven
+2022-10-13 14:33:09,298 WARN c.i.e.v.EmployeeView com.ideas2it.employee.view.EmployeeView.chooseOption(EmployeeView.java:89) Invalid input... Try again
+2022-10-13 14:35:31,122 INFO c.i.e.v.EmployeeView com.ideas2it.employee.view.EmployeeView.deleteEmployee(EmployeeView.java:244) Employee Details Not Deleted
+2022-10-13 14:38:12,430 INFO c.i.e.v.EmployeeView com.ideas2it.employee.view.EmployeeView.deleteEmployee(EmployeeView.java:244) Employee Details Not Deleted

@@ -29,7 +29,6 @@ public class EmployeeDao implements Dao {
     Factory factoryConnection = Factory.getFactory();
     private static final Logger logger = LogManager.getLogger(EmployeeDao.class);
 
-
     /**
      * Save the employee details.
      * @param employee details.
@@ -42,6 +41,7 @@ public class EmployeeDao implements Dao {
         boolean isAdded = false;
         PreparedStatement preparedStatement = null;
         int count = 0; 
+        int employeeId = 0;
         try {
             String query = "insert into employee( first_name, last_name, gender, date_of_birth, mobile_number, email_id, salary, date_of_joining, role) values(?,?,?,?,?,?,?,?,?)"; 
             preparedStatement = connection.prepareStatement(query);
@@ -61,7 +61,6 @@ public class EmployeeDao implements Dao {
             PreparedStatement statement = connection.prepareStatement(queries);
             statement.setString(1, employee.getEmailId());
             ResultSet resultSet = statement.executeQuery();
-            int employeeId = 0;
 
             while (resultSet.next()) {
                 employeeId = resultSet.getInt(1);
@@ -69,7 +68,7 @@ public class EmployeeDao implements Dao {
             isAdded = addAddress(employee.getAddress(), employeeId);
 
         } catch (SQLException e) {
-            logger.error("Error occured in insert data, Try again");
+            logger.error("Employee Details Not Added");
             throw new EMSException( "ERROR 404", "Error occured in insert data, Try again");    
         } finally {
             factoryConnection.closeConnection();
@@ -77,6 +76,7 @@ public class EmployeeDao implements Dao {
 
         if(count > 0) {
             isAdded = true;
+            logger.info("Employee Details created Employee Id :" + employeeId);
         } else {
             isAdded = false;
         }
@@ -112,7 +112,7 @@ public class EmployeeDao implements Dao {
                 count = preparedStatement.executeUpdate();
             }
         } catch (SQLException e) {
-            logger.error("Error occured in insert data, Try again");
+            logger.error("Employee address Details not added");
             throw new EMSException
             ("ERROR 404", "Error occured in insert data, Try again");
         } finally {
@@ -181,7 +181,7 @@ public class EmployeeDao implements Dao {
                 employees.add(employee);
             }
         } catch (SQLException e) {
-            logger.error("Error occured the data, Try again");
+            logger.error("Employee Details Not displayed");
             throw new EMSException("ERROR 405",
                     "Error occured the data, Try again");
         } finally {
@@ -220,9 +220,9 @@ public class EmployeeDao implements Dao {
             count = preparedStatement.executeUpdate();
             isUpdate = updateAddress(employee.getAddress(), employeeid);
         } catch (SQLException e) {
-              logger.error("Error occured update the  data, Try again");
-              throw new EMSException
-              ("ERROR 406", "Error occured update the  data, Try again");
+            logger.error("Employee Details Not found" + "EmployeeID :" + employeeid);
+            throw new EMSException
+            ("ERROR 406", "Error occured update the  data, Try again");
         } finally {
             factoryConnection.closeConnection();
         }
@@ -258,9 +258,9 @@ public class EmployeeDao implements Dao {
                     count = preparedStatement.executeUpdate(); 
                 } 
             } catch (SQLException e) {
-                 logger.error("Error occured in update the data, Try again");
-                 throw new EMSException
-                 ("ERROR 406", "Error occured in update the data, Try again");
+                logger.error("Employee Details Not found");
+                throw new EMSException
+                ("ERROR 406", "Error occured in update the data, Try again");
         } finally {
             factoryConnection.closeConnection();
         }
@@ -287,9 +287,9 @@ public class EmployeeDao implements Dao {
             preparedStatement.setInt(1,employeeId);
             count = preparedStatement.executeUpdate();
         } catch (SQLException e) {
-             logger.error("Error occured in delete the data, Try again");
-             throw new EMSException
-             ("ERROR 407", "Error occured in delete the data, Try again");
+            logger.error("Employee Details Not found" + "Employee ID :" + employeeId);
+            throw new EMSException
+            ("ERROR 407", "Error occured in delete the data, Try again");
         } finally {
             factoryConnection.closeConnection();
         }
@@ -361,7 +361,7 @@ public class EmployeeDao implements Dao {
                  employees.add(employee);
             }
         } catch (SQLException e) {
-             logger.error("Error occured the data, Try again");
+             logger.error("Employee Details Not found");
              throw new EMSException("Error occured the data, Try again", "ERROR 408");
         } finally {
             factoryConnection.closeConnection();
