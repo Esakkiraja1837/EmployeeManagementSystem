@@ -13,7 +13,7 @@ import java.time.Period;
 public class ValidationUtil {
 
 
-    public boolean joiningDateValidate(LocalDate dateOfBirth, LocalDate joiningDate){
+    public boolean validateJoiningDate(LocalDate dateOfBirth, LocalDate joiningDate){
         boolean isValid = true;
 
         LocalDate currentDate = LocalDate.now();
@@ -28,7 +28,7 @@ public class ValidationUtil {
         return isValid;
     }
 
-    public boolean dateOfBirthValidate(LocalDate dateOfBirth) {
+    public boolean validateDateOfBirth(LocalDate dateOfBirth) {
         boolean isValid= true;
         LocalDate currentDate = LocalDate.now();
         isValid = (18 <= Period.between(dateOfBirth, currentDate).getYears()

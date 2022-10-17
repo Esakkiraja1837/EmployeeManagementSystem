@@ -8,7 +8,10 @@ import com.ideas2it.employee.dao.Dao;
 import com.ideas2it.employee.dao.impl.EmployeeDao;
 import com.ideas2it.employee.exception.EMSException;
 import com.ideas2it.employee.service.EmployeeService;
-import com.ideas2it.employee.util.validationUtil;
+import com.ideas2it.employee.util.ValidationUtil;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.time.Period;
 import java.text.ParseException;
@@ -32,8 +35,11 @@ public class EmployeeView {
 
     Scanner scanner = new Scanner(System.in);
     EmployeeController employeeController = new EmployeeController(); 
-    validationUtil employeeUtil = new validationUtil();
+    ValidationUtil employeeUtil = new ValidationUtil();
     EmployeeDTO employeeDTO = new EmployeeDTO();
+
+    private static final Logger logger = LogManager.getLogger(EmployeeView.class);
+
     boolean isValid;
 
     /**
@@ -80,6 +86,8 @@ public class EmployeeView {
                     break;
 
                 default:
+                    logger.warn(EmployeeManagementConstant.
+                                       INVALID_INPUT);
                     System.out.println(EmployeeManagementConstant.
                                        INVALID_INPUT);
             }
@@ -117,13 +125,17 @@ public class EmployeeView {
                     joiningDate,  dateOfBirth, gender);
 
             if (employeeController.addEmployee(employeeDTO)) {
+                logger.info("Employee details stored");
                 System.out.println("Employee details stored.");
             } else {
-                System.out.println("Employee details not stored.");
+                logger.info("Employee details can not stored");
+                System.out.println("Employee details can not stored.");
             }
         } catch (EMSException e) {
-           System.out.println(e.getMessage() + " " +e.getErrorCode());
+           logger.error("Employee Deatils not Created");
+           System.out.println(e.getMessage() + " " + e.getErrorCode());
         }
+
 
     }
 
@@ -150,6 +162,7 @@ public class EmployeeView {
      * Display the saved employeeDetails.
      */
     public void displayEmployee() {
+
         try {
             List<EmployeeDTO> employeesDetail = employeeController.
                                                 displayEmployee();
@@ -162,10 +175,12 @@ public class EmployeeView {
                     System.out.println(employeeDTO.toString());
                 }
             } else {
+                logger.info("Can not found the employeeDetails");
                 System.out.println("Empty data...");
             }
         } catch (EMSException e) {
-           System.out.println(e.getMessage() + " " + e.getErrorCode());
+              logger.error("Can not found the employeeDetails");
+              System.out.println(e.getMessage() + " " + e.getErrorCode());
         }
     }
 
@@ -201,11 +216,14 @@ public class EmployeeView {
                     joiningDate,  dateOfBirth, gender);
 
             if (employeeController.updateEmployee(employeeDTO)) {
-                System.out.println("Update the Employee Details");
+                logger.info("Employee Details Updated");
+                System.out.println("Employee Details Updated");
             } else {
+                logger.info("Employee Details not Updated");
                 System.out.println("Not Update the Employee Details");
             }
         } catch (EMSException e) {
+           logger.error("Employee Detail can not updated");
            System.out.println(e.getMessage() + " " + e.getErrorCode());
         }
     }
@@ -220,11 +238,14 @@ public class EmployeeView {
         try {
 
             if (employeeController.removeEmployee(employeeId)) {
+                logger.info("Employee Details Deleted");
                 System.out.println("Employee Details Deleted");
             } else {
+                logger.info("Employee Details Not Deleted");
                 System.out.println("Employee Details not deleted");
             }
         } catch (EMSException e) {
+           logger.error("Employee Details Not found" + "Employee ID :" + employeeId);
            System.out.println(e.getMessage() + " " + e.getErrorCode());
         }
     }
@@ -248,9 +269,11 @@ public class EmployeeView {
                     System.out.println(employeeDTO);
                 }
             } else {
-                System.out.println("The Employee Detail Not found ");
+                logger.info("Employee Details Not found" + "First Name :" + firstName); 
+                System.out.println("The Employee Detail Not found " + firstName);
             }
         } catch (EMSException e) {
+           logger.info("The Employee Detail Not found" + "First Name :" + firstName);
            System.out.println(e.getMessage() + " " + e.getErrorCode());
         }
     }
@@ -268,7 +291,7 @@ public class EmployeeView {
                 isValid = true;
 
             } else if (choice .equals("N") || choice.equals("n")) {
-                System.out.println("No second address added");
+                System.out.println("Employee can't Second address");
                 isValid = true;
             } else {
                 System.out.println("Invalid choice");
@@ -450,6 +473,7 @@ public class EmployeeView {
          } while (!isValid);
          return firstName;
     }
+
     /**
      * validate Employee Gender.
      * @return Return gender.
@@ -601,6 +625,7 @@ public class EmployeeView {
 
                 if (!isValid) {
                     System.out.println("Invalid salary format");
+                    logger.warn("Invalid salary format");
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Invalid salary format");
@@ -631,7 +656,7 @@ public class EmployeeView {
             }
 
             if (isValid) {
-                isValid = employeeController.joiningDateValidate(dateOfBirth, joiningDate);
+                isValid = employeeController.validateJoiningDate(dateOfBirth, joiningDate);
             } 
 
             if (!isValid) {
@@ -661,7 +686,7 @@ public class EmployeeView {
             }
 
             if (isValid) {
-                isValid = employeeController.dateOfBirthValidate(dateOfBirth);
+                isValid = employeeController.validateDateOfBirth(dateOfBirth);
             }
 
             if (!(isValid)) {

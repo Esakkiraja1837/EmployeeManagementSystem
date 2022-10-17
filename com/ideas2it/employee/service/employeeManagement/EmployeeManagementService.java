@@ -94,15 +94,15 @@ public class EmployeeManagementService {
     /**
      * {@inheritDoc}
      */
-    public boolean joiningDateValidate(LocalDate dateOfBirth, LocalDate joiningDate) {
-       return employeeUtil.joiningDateValidate(dateOfBirth, joiningDate);
+    public boolean validateJoiningDate(LocalDate dateOfBirth, LocalDate joiningDate) {
+       return employeeUtil.validateJoiningDate(dateOfBirth, joiningDate);
     }
 
     /**
      * {@inheritDoc}
      */
-    public boolean dateOfBirthValidate(LocalDate dateOfBirth) {
-        return employeeUtil.dateOfBirthValidate(dateOfBirth);
+    public boolean validateDateOfBirth(LocalDate dateOfBirth) {
+        return employeeUtil.validateDateOfBirth(dateOfBirth);
     }
 
     /**
