@@ -195,8 +195,8 @@ public class EmployeeView {
         List<AddressDTO> addressDTOs = new ArrayList<>();
 
         try {
-            boolean isValid;       
-            
+            boolean isValid;
+
             int employeeId = getEmployeeId();
             String firstName = getFirstName();
             String lastName = getLastName();

@@ -11,6 +11,7 @@ import java.time.LocalDate;
  */
 public class Address {
 
+    private int id;
     private String doorNo;
     private String street;
     private String city;
@@ -36,6 +37,10 @@ public class Address {
 
     public void setDoorNo(String doorNo) {
         this.doorNo = doorNo;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setStreet(String street) {
@@ -69,6 +74,10 @@ public class Address {
 
     public String getCity() {
         return city;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getState() {

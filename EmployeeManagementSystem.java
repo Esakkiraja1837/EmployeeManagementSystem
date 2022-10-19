@@ -1,4 +1,3 @@
-package com.ideas2it.employee.main;
 
 import com.ideas2it.employee.view.EmployeeView;
 

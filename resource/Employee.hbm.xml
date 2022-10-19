@@ -1,0 +1,29 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC  
+         "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name = "com.ideas2it.employee.model.Employee" table = "employee">
+    <id name = "employeeId" column = "employee_id">
+        <generator class = "increment"></generator>
+    </id>
+
+    <property name = "firstName" column = "first_name"/>
+    <property name = "lastName" column = "last_name"/>
+    <property name = "role" column = "role"/>
+    <property name = "mobileNumber" column = "mobile_number"/>
+    <property name = "emailId" column = "email_id"/>
+    <property name = "salary" column = "salary"/>
+    <property name = "joiningDate" column = "date_of_joining"/>
+    <property name = "dateOfBirth" column = "date_of_birth"/>
+    <property name = "gender" column = "gender"/>
+
+    <bag name = "address" cascade = "all" lazy = "false">
+        <key>
+            <column name = "employee_id"/>
+        </key>
+        <one-to-many class = "com.ideas2it.employee.model.Address"/>
+    </bag>
+    </class>
+</hibernate-mapping>
