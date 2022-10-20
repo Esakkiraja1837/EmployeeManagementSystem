@@ -1,5 +1,6 @@
 package com.ideas2it.employee.service.employeeManagement;
 
+import com.ideas2it.employee.constant.EmployeeManagementConstant;
 import com.ideas2it.employee.dao.Dao;
 import com.ideas2it.employee.dao.impl.EmployeeDao;
 import com.ideas2it.employee.dto.AddressDTO;
@@ -9,16 +10,15 @@ import com.ideas2it.employee.mapper.EmployeeMapper;
 import com.ideas2it.employee.model.Employee;
 import com.ideas2it.employee.service.EmployeeService;
 import com.ideas2it.employee.view.EmployeeView;
-import com.ideas2it.employee.constant.EmployeeManagementConstant;
 import com.ideas2it.employee.util.ValidationUtil;
 
-import java.util.stream.Stream;
-import java.util.ArrayList;
-import java.util.List;
 import java.time.LocalDate;
-import java.util.Iterator;
 import java.time.Period;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.stream.Stream;
 import java.util.regex.Pattern;
 
 
@@ -36,7 +36,7 @@ public class EmployeeManagementService {
     /**
      * {@inheritDoc}
      */
-    public boolean addEmployee(EmployeeDTO employeeDTO) throws EMSException {
+    public int addEmployee(EmployeeDTO employeeDTO) throws EMSException {
         return employeeDao.addEmployee(employeeMapper.toEmployee(employeeDTO));
     }
 
@@ -65,15 +65,15 @@ public class EmployeeManagementService {
     /**
      * {@inheritDoc}
      */
-    public boolean updateEmployee(EmployeeDTO employeeDTO) throws EMSException {
-        return employeeDao.updateEmployee(employeeMapper.toEmployee(employeeDTO));
+    public void updateEmployee(EmployeeDTO employeeDTO) throws EMSException {
+        employeeDao.updateEmployee(employeeMapper.toEmployee(employeeDTO));
     }
 
     /**
      * {@inheritDoc}
      */
-    public boolean deleteEmployee(int employeeId) throws EMSException {
-        return employeeDao.deleteEmployee(employeeId);
+    public void deleteEmployee(int employeeId) throws EMSException {
+        employeeDao.deleteEmployee(employeeId);
     }
 
     /**
@@ -119,5 +119,41 @@ public class EmployeeManagementService {
     public boolean validateEmailId(String emailId) throws EMSException {
         return (!(displayEmployee().stream().anyMatch
                 (employeeDTO -> employeeDTO.getEmailId().equals(emailId))));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public boolean isEmployeeIdExists(int employeeId) throws EMSException {
+
+        List<Employee> employee = employeeDao.displayEmployee();
+        boolean isValid = false;
+        EmployeeDTO employeeDto = null;
+
+        for (int i=0; i < employee.size(); i++) {
+
+            if (employee.get(i).getEmployeeId() == employeeId) {
+                employeeDto = (employeeMapper.toEmployeeDTO(employee.get(i)));
+                isValid = true;
+            }
+        }
+        return isValid;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public EmployeeDTO getEmployeeIdPresent(int employeeId) throws EMSException {
+
+        List<Employee> employee = employeeDao.displayEmployee();
+        EmployeeDTO employeeDto = null;
+
+        for (int i=0; i < employee.size(); i++) {
+
+            if (employee.get(i).getEmployeeId() == employeeId) {
+                employeeDto = (employeeMapper.toEmployeeDTO(employee.get(i)));
+            }
+        }
+        return employeeDto;
     }
 }

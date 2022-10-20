@@ -15,6 +15,11 @@ public class EmployeeManagementConstant {
     public static final String VALID_INPUT = "Enter valid input";
     public static final String EMPLOYEE_SALARY = "Enter Employee Salary (0.00) : ";
     public static final String EMPLOYEE_ID = "Enter Employee ID: ";
+
+    public static final String INVALID_DATA = "Invalid data format please try again...";
+
+    public static final String EMPLOYEE_DETAILS_NOTFOUND = "Employee Details Not Found";
+    public static final String ERROR_OCCUR_TRYAGAIN ="Error occured the data, Try again";
     public static final String REGEX_SALARY = "([0-9]{3,}([.][0-9]{2}))|([0-9]{3,}?)";
     public static final String REGEX_CITYSTATE = "([a-zA-Z]{2,20})(([ ]([a-zA-Z]){2,20})?)";
     public static final String REGEX_NAME = "(([A-Za-z]{2,20})((([ ])([a-zA-Z]){2,20})?){1,4})";
