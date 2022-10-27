@@ -11,6 +11,7 @@ import java.time.LocalDate;
  */
 public class Address {
 
+    private int id;
     private String doorNo;
     private String street;
     private String city;
@@ -24,7 +25,6 @@ public class Address {
 
     public Address(String doorNo, String street, String city,
                    String state, int pinCode, String type) {
-
         this.doorNo = doorNo;
         this.street = street;
         this.city = city;
@@ -44,6 +44,14 @@ public class Address {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public void setState(String state) {
@@ -86,6 +94,7 @@ public class Address {
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("\n\n ADDRESS of Employee: \n")
+               .append("\n AddressId        : ").append(this.getId())
                .append("\n DoorNo           : ").append(this.getDoorNo())
                .append("\n Street           : ").append(this.getStreet())
                .append("\n City             : ").append(this.getCity())

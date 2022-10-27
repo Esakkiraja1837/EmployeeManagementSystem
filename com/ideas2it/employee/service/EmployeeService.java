@@ -23,7 +23,7 @@ public interface EmployeeService {
      * @param employee from controller
      * @return Return the boolean value.
      */
-    public boolean addEmployee(EmployeeDTO employeeDTO) throws EMSException;
+    public int addEmployee(EmployeeDTO employeeDTO) throws EMSException;
 
     /**
      * Compares if the detail matches the expectation
@@ -64,7 +64,7 @@ public interface EmployeeService {
      * @param employee name
      * @return true if employee details are deleted.
      */
-    public boolean deleteEmployee(int employeeId) throws EMSException;
+    public void deleteEmployee(int employeeId) throws EMSException;
 
     /**
      * validate the employee joiningDate
@@ -100,4 +100,18 @@ public interface EmployeeService {
      * @return Return the boolean value.
      */
     public boolean validateEmailId(String emailId) throws EMSException;
+
+    /**
+     * Check EmployeeId Exists or Not
+     *
+     *@return Return value
+     */
+    public boolean isEmployeeIdExists(int employeeId) throws EMSException;
+
+    /**
+     * Check EmployeeId Exists or Not
+     *
+     *@return Return EmployeeDetail
+     */
+    public EmployeeDTO getEmployeeIdPresent(int employeeId) throws EMSException;
 }

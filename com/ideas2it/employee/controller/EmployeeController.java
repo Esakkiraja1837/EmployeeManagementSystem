@@ -2,10 +2,10 @@ package com.ideas2it.employee.controller;
 
 import com.ideas2it.employee.dto.AddressDTO;
 import com.ideas2it.employee.dto.EmployeeDTO;
+import com.ideas2it.employee.exception.EMSException;
 import com.ideas2it.employee.service.EmployeeService;
 import com.ideas2it.employee.service.employeeManagement.EmployeeManagementService;
 import com.ideas2it.employee.view.EmployeeView;
-import com.ideas2it.employee.exception.EMSException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +28,7 @@ public class EmployeeController {
      *
      * @return returns true 
      */
-    public boolean addEmployee(EmployeeDTO employeeDTO) throws EMSException{
+    public int addEmployee(EmployeeDTO employeeDTO) throws EMSException{
         return employeeService.addEmployee(employeeDTO);
     }
 
@@ -55,8 +55,8 @@ public class EmployeeController {
      * @param employeeDTO
      * @return the employee details.
      */
-    public boolean updateEmployee(EmployeeDTO employeeDTO) throws EMSException {
-        return employeeService.updateEmployee(employeeDTO);
+    public void updateEmployee(EmployeeDTO employeeDTO) throws EMSException {
+        employeeService.updateEmployee(employeeDTO);
     }
 
     /**
@@ -64,8 +64,8 @@ public class EmployeeController {
      *
      * @return true if employee is deleted
      */
-    public boolean removeEmployee(int employeeId) throws EMSException {
-        return employeeService.deleteEmployee(employeeId);
+    public void removeEmployee(int employeeId) throws EMSException {
+        employeeService.deleteEmployee(employeeId);
     }
 
     /**
@@ -75,8 +75,7 @@ public class EmployeeController {
      * @return Returns employeedetails.
      */
     public List<EmployeeDTO> searchEmployee(String firstName) throws EMSException {
-        return employeeService.searchEmployee(firstName);
-       
+        return employeeService.searchEmployee(firstName);  
     }
 
     /**
@@ -89,7 +88,6 @@ public class EmployeeController {
     public boolean validateJoiningDate(LocalDate dateOfBirth, LocalDate joiningDate) {
         return employeeService.validateJoiningDate(dateOfBirth, joiningDate);
     }
-
 
     /**
      * validate Employee DateOfBirth.
@@ -123,4 +121,26 @@ public class EmployeeController {
     public boolean validateEmailId(String emailId) throws EMSException {
         return employeeService.validateEmailId(emailId);
     }
+
+    /**
+     * Check EmployeeId exists or not.
+     *
+     * @parm employee details(employeeId).
+     * @return Return value.
+     *
+     */
+    public boolean isEmployeeIdExists(int employeeId) throws EMSException {
+        return employeeService.isEmployeeIdExists(employeeId);
+    }
+
+    /**
+     * Check EmployeeId exists or not.
+     *
+     * @parm employee details(employeeId).
+     * @return Return value.
+     *
+     */
+    public EmployeeDTO getEmployeeIdPresent(int employeeId) throws EMSException {
+        return employeeService.getEmployeeIdPresent(employeeId);
+    } 
 }

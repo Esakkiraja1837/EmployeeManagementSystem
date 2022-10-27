@@ -11,6 +11,7 @@ import java.time.LocalDate;
  */
 public class AddressDTO {
 
+    private int id;
     private String doorNo;
     private String street;
     private String city;
@@ -38,6 +39,10 @@ public class AddressDTO {
         this.doorNo = doorNo;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public void setStreet(String street) {
         this.street = street;
     }
@@ -60,6 +65,10 @@ public class AddressDTO {
 
     public String getDoorNo() {
         return doorNo;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getStreet() {
@@ -85,6 +94,7 @@ public class AddressDTO {
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("\n\n ADDRESS of Employee: \n")
+               .append("\n AddressId        : ").append(this.getId())
                .append("\n DoorNo           : ").append(this.getDoorNo())
                .append("\n Street           : ").append(this.getStreet())
                .append("\n City             : ").append(this.getCity())
