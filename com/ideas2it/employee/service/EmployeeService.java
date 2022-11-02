@@ -1,5 +1,5 @@
 package com.ideas2it.employee.service;
-
+import com.ideas2it.employee.dto.ProjectDTO;
 import com.ideas2it.employee.dto.AddressDTO;
 import com.ideas2it.employee.dto.EmployeeDTO;
 import com.ideas2it.employee.exception.EMSException;
@@ -40,7 +40,7 @@ public interface EmployeeService {
      * @param employee
      * @return Returns employee
      */
-    public List<EmployeeDTO> displayEmployee() throws EMSException;
+    public List<EmployeeDTO> getAllEmployee() throws EMSException;
 
     /**
      * Receives relevent employee details from database.
