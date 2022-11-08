@@ -1,8 +1,7 @@
-package com.ideas2it.employee.dao.impl;
+package com.ideas2it.employee.dao;
 
-import com.ideas2it.employee.constant.EmployeeManagementConstant;
 import com.ideas2it.employee.connection.ConneectionUtil;
-import com.ideas2it.employee.dao.Dao;
+import com.ideas2it.employee.constant.EmployeeManagementConstant;
 import com.ideas2it.employee.exception.EMSException;
 import com.ideas2it.employee.model.Address;
 import com.ideas2it.employee.model.Employee;
@@ -27,7 +26,7 @@ import java.util.List;
  * Save the Employee details, read, serach, update, and delete.
  * @author  Esakkiraja.
  */
-public class EmployeeDao implements Dao { 
+public class EmployeeDao { 
 
     SessionFactory factory = ConneectionUtil.getSessionFactory();
 
@@ -36,44 +35,41 @@ public class EmployeeDao implements Dao {
     /**
      * Save the employee details.
      * @param employee details.
-     * @return if employee details added it returns true/false value.
+     * @return if employeeid value.
      */
-    @Override
     public int addEmployee(Employee employee) throws EMSException {
-        Session session = factory.openSession();
         Transaction transaction = null;
+        Session session = factory.openSession();
         int employeeId;
 
         try {
             transaction = session.beginTransaction();
             employeeId = (Integer) session.save(employee);
             transaction.commit();
-
         } catch(HibernateException e) {
-            logger.error("Employee Details Not Added");
+            logger.error(e.getMessage());
             throw new EMSException( "ERROR 404", "Error occured in insert data, Try again");
+        } finally {
+            session.close();
         }
         return employeeId;
     }
 
     /**
      * Employee details were display from the database.
-     * @return employee list returned.
-     */
-    @Override 
-    public List<Employee> displayEmployee() throws EMSException {
+     * @return employee list of value.
+     */ 
+    public List<Employee> getAllEmployee() throws EMSException {
         List<Employee> employees = new ArrayList();
-        Transaction transaction = null;
+        Session session = factory.openSession();
 
         try {
-            Session session = factory.openSession();
-            transaction = session.beginTransaction();
             employees = session.createQuery("FROM Employee").list();
-            transaction.commit();
-
         } catch(HibernateException e) {
-            logger.error("Employee Details Not displayed");
+            logger.error(e.getMessage());
             throw new EMSException("ERROR 405","Error occured the data, Try again");
+        } finally {
+            session.close();
         }
         return employees;
     }
@@ -81,23 +77,22 @@ public class EmployeeDao implements Dao {
     /**
      * The employee details were update by the given employeeid.
      * @param employee details from user
-     * @param employeeid from user
-     * @return boolean value if update returns true else returns false.
+     * @param employee from user
      */ 
-    @Override
     public void updateEmployee(Employee employee) throws EMSException { 
         Transaction transaction = null;
+        Session session = factory.openSession();
 
         try {
-            Session session = factory.openSession();
             transaction = session.beginTransaction();
-            session.merge(employee);
+            session.update(employee);
             transaction.commit();
-
         } catch(HibernateException e) {
-            logger.error(EmployeeManagementConstant.EMPLOYEE_DETAILS_NOTFOUND);
+            logger.error(e.getMessage());
             throw new EMSException
             ("ERROR 406", "Error occured update the  data, Try again");
+        } finally {
+            session.close();
         }
     }
 
@@ -105,23 +100,22 @@ public class EmployeeDao implements Dao {
      * Used to delete the employee details from the database.
      * Employee id from user used to delete the employee details.
      * @param employeeid from the user.
-     * @return boolean value if employee deleted it returns true/false.
      */
-    @Override
-    public void deleteEmployee(int employeeId) throws EMSException {
-        Session session = factory.openSession();
+    public void deleteEmployee(int employeeId) throws EMSException { 
         Transaction transaction = null;
+        Session session = factory.openSession();
 
         try {
             transaction = session.beginTransaction();
             Employee employee = (Employee) session.get(Employee.class, employeeId);
             session.remove(employee);
             transaction.commit();
-
         } catch (HibernateException e) {
-            logger.error(EmployeeManagementConstant.EMPLOYEE_DETAILS_NOTFOUND + "Employee ID :" + employeeId);
+            logger.error(e.getMessage() + "Employee ID :" + employeeId);
             throw new EMSException
             ("ERROR 407", "Error occured in delete the data, Try again");
+        } finally {
+            session.close();
         }
     }
 
@@ -130,22 +124,18 @@ public class EmployeeDao implements Dao {
      * help of given name from the employee.
      * @param employee name from the user. 
      */
-    @Override
     public List<Employee> searchEmployee(String firstName) throws EMSException {
         List<Employee> employees = new ArrayList();
-        Transaction transaction = null;
-
+        Session session = factory.openSession();
         try {
-            Session session = factory.openSession();
-            transaction = session.beginTransaction();
             Criteria criteria = session.createCriteria(Employee.class);
             employees = (List<Employee>) criteria.add(Restrictions.like
                                   ("firstName", (firstName + "%"))).list();
-            transaction.commit();
-
         } catch (HibernateException e) {
-             logger.error(EmployeeManagementConstant.EMPLOYEE_DETAILS_NOTFOUND);
+             logger.error(e.getMessage());
              throw new EMSException("Error occured the data, Try again", "ERROR 408");
+        } finally {
+            session.close();
         }
         return employees;
     }

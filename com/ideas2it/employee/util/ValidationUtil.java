@@ -37,7 +37,6 @@ public class ValidationUtil {
 
         return isValid;
     }
-
 }
 
     

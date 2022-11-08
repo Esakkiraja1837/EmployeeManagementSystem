@@ -24,13 +24,14 @@ public class Employee {
     private LocalDate joiningDate;
     private LocalDate dateOfBirth;
     private String gender;
+    private List<Project> project;
 
     public Employee() {
     }
 
     public Employee(String firstName, String lastName, int employeeId, String role,
                     long mobileNumber, String emailId, double salary, List<Address> address,
-                    LocalDate joiningDate, LocalDate dateOfBirth, String gender) {
+                    LocalDate joiningDate, LocalDate dateOfBirth, String gender,List<Project> Project) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.employeeId = employeeId;
@@ -42,6 +43,7 @@ public class Employee {
         this.joiningDate = joiningDate;
         this.dateOfBirth = dateOfBirth;
         this.gender = gender;
+        this.project = project;
     }
 
     public void setFirstName(String firstName) {
@@ -133,6 +135,14 @@ public class Employee {
         return mobileNumber;
     }
 
+    public List<Project> getProject() {
+        return project;
+    }
+
+    public void setProject(List<Project> project) {
+        this.project = project;
+    }
+
     /**
      * overiding toString() Method.
      * inside toString Method it uses String Builder to Concat 
@@ -140,7 +150,7 @@ public class Employee {
      */
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append("\n Detail of Employee: \n")
+        builder.append("\n\n Detail of Employee: \n")
                .append("\n First Name      : ").append(this.getFirstName())
                .append("\n Last Name       : ").append(this.getLastName())
                .append("\n Employee ID     : ").append(this.getEmployeeId())

@@ -1,11 +1,8 @@
 package com.ideas2it.employee.dto;
 
-import com.ideas2it.employee.dto.AddressDTO;
-
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ArrayList;
-
 
 /**
  * It present employee details.
@@ -15,6 +12,7 @@ import java.util.ArrayList;
  * 13-09-2022.
  */
 public class EmployeeDTO {
+
     private String firstName; 
     private String lastName;
     private int employeeId;
@@ -26,6 +24,7 @@ public class EmployeeDTO {
     private LocalDate joiningDate;
     private LocalDate dateOfBirth;
     private String gender;
+    private List<ProjectDTO> project;
 
     public EmployeeDTO() {
     }
@@ -33,7 +32,7 @@ public class EmployeeDTO {
     public EmployeeDTO(String firstName, String lastName, int employeeId,
                        String role, long mobileNumber,String emailId,
                        double salary, List<AddressDTO> address,
-                       LocalDate joiningDate, LocalDate dateOfBirth, String gender) {
+                       LocalDate joiningDate, LocalDate dateOfBirth, String gender, List<ProjectDTO> project) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.employeeId = employeeId;
@@ -44,7 +43,8 @@ public class EmployeeDTO {
         this.address = address;
         this.joiningDate = joiningDate;
         this.dateOfBirth = dateOfBirth;
-        this.gender = gender; 
+        this.gender = gender;
+        this.project = project; 
     }
 
     public void setFirstName(String firstName) {
@@ -135,6 +135,13 @@ public class EmployeeDTO {
         return mobileNumber;
     }
 
+    public List<ProjectDTO> getProject() {
+        return project;
+    }
+
+    public void setProject(List<ProjectDTO> project) {
+        this.project = project;
+    }
 
     /**
      * overiding toString() Method.
@@ -154,7 +161,8 @@ public class EmployeeDTO {
                .append("\n Joining Of Date : ").append(this.getJoiningDate())
                .append("\n Date Of Birth   : ").append(this.getDateOfBirth())
                .append("\n Gender          : ").append(this.getGender())
-               .append(this.getAddress());
+               .append(this.getAddress())
+               .append(this.getProject());
         return builder.toString();
 
     }

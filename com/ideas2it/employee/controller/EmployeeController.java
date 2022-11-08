@@ -2,9 +2,12 @@ package com.ideas2it.employee.controller;
 
 import com.ideas2it.employee.dto.AddressDTO;
 import com.ideas2it.employee.dto.EmployeeDTO;
+import com.ideas2it.employee.dto.ProjectDTO;
 import com.ideas2it.employee.exception.EMSException;
 import com.ideas2it.employee.service.EmployeeService;
 import com.ideas2it.employee.service.employeeManagement.EmployeeManagementService;
+import com.ideas2it.employee.service.employeeManagement.ProjectManagementService;
+import com.ideas2it.employee.service.ProjectService;
 import com.ideas2it.employee.view.EmployeeView;
 
 import java.util.ArrayList;
@@ -46,8 +49,8 @@ public class EmployeeController {
      *
      * @return the employee details.
      */
-    public List<EmployeeDTO> displayEmployee() throws EMSException {
-        return employeeService.displayEmployee();
+    public List<EmployeeDTO> getAllEmployee() throws EMSException {
+        return employeeService.getAllEmployee();
     }
 
     /**
@@ -143,4 +146,10 @@ public class EmployeeController {
     public EmployeeDTO getEmployeeIdPresent(int employeeId) throws EMSException {
         return employeeService.getEmployeeIdPresent(employeeId);
     } 
+
+    public ProjectDTO getProject(int projectId) throws EMSException {
+        ProjectManagementService projectManagementService = new ProjectManagementService();
+        ProjectDTO projectDto = projectManagementService.getProjectIdPresent(projectId);
+        return projectDto;
+    }
 }

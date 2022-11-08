@@ -1,13 +1,18 @@
 package com.ideas2it.employee.service.employeeManagement;
 
 import com.ideas2it.employee.constant.EmployeeManagementConstant;
-import com.ideas2it.employee.dao.Dao;
-import com.ideas2it.employee.dao.impl.EmployeeDao;
+import com.ideas2it.employee.dao.EmployeeDao;
+import com.ideas2it.employee.dao.ProjectManagementDao;
 import com.ideas2it.employee.dto.AddressDTO;
 import com.ideas2it.employee.dto.EmployeeDTO;
+import com.ideas2it.employee.dto.ProjectDTO;
 import com.ideas2it.employee.exception.EMSException;
-import com.ideas2it.employee.mapper.EmployeeMapper;
+import com.ideas2it.employee.model.Project;
 import com.ideas2it.employee.model.Employee;
+import com.ideas2it.employee.mapper.EmployeeMapper;
+import com.ideas2it.employee.mapper.ProjectMapper;
+import com.ideas2it.employee.service.ProjectService;
+import com.ideas2it.employee.service.employeeManagement.ProjectManagementService;
 import com.ideas2it.employee.service.EmployeeService;
 import com.ideas2it.employee.view.EmployeeView;
 import com.ideas2it.employee.util.ValidationUtil;
@@ -32,7 +37,8 @@ public class EmployeeManagementService {
     EmployeeDao employeeDao = new EmployeeDao();
     EmployeeMapper employeeMapper = new EmployeeMapper();
     ValidationUtil employeeUtil = new ValidationUtil();
-
+    ProjectMapper projectMapper = new ProjectMapper();
+    
     /**
      * {@inheritDoc}
      */
@@ -50,16 +56,26 @@ public class EmployeeManagementService {
     /**
      * {@inheritDoc}
      */
-    public List<EmployeeDTO> displayEmployee() throws EMSException {
-        List<Employee> employeeDetails = employeeDao.displayEmployee();
+    public List<EmployeeDTO> getAllEmployee() throws EMSException {
+        List<Employee> employeeDetails = employeeDao.getAllEmployee();
 
-        List<EmployeeDTO> employeeDto = new ArrayList<EmployeeDTO>();
+        List<EmployeeDTO> employeeDTOList = new ArrayList<EmployeeDTO>();
+        EmployeeDTO employeeDto;
 
-        for (int i = 0; i < employeeDetails.size(); i++) {
-            Employee employee = employeeDetails.get(i);
-            employeeDto.add(employeeMapper.toEmployeeDTO(employee));
+        for(Employee employee : employeeDetails ){
+            employeeDto = employeeMapper.toEmployeeDTO(employee);
+
+            if(null != employee.getProject()) {
+                List<ProjectDTO> projectList = new ArrayList<ProjectDTO>();
+
+                for(Project project : employee.getProject()) {
+                    projectList.add(projectMapper.toProjectDTO(project));
+                    employeeDto.setProject(projectList);
+                }
+            }
+            employeeDTOList.add(employeeDto);
         }
-        return employeeDto;
+        return employeeDTOList;
     }
 
     /**
@@ -83,8 +99,7 @@ public class EmployeeManagementService {
         List<Employee> employeeDetails = employeeDao.searchEmployee(firstName);
         List<EmployeeDTO> employeeDto = new ArrayList<EmployeeDTO>();
 
-        for (int i = 0; i < employeeDetails.size(); i++) {
-            Employee employee = employeeDetails.get(i);
+        for (Employee employee : employeeDetails) {
             employeeDto.add(employeeMapper.toEmployeeDTO(employee));
         }
         return employeeDto;
@@ -109,7 +124,7 @@ public class EmployeeManagementService {
      * {@inheritDoc}
      */
     public boolean validateMobileNumber(long mobileNumber) throws EMSException {
-        return (!(displayEmployee().stream().anyMatch(employeeDTO -> String.valueOf
+        return (!(getAllEmployee().stream().anyMatch(employeeDTO -> String.valueOf
               (employeeDTO.getMobileNumber()).equals(Long.toString(mobileNumber)))));
     }
 
@@ -117,7 +132,7 @@ public class EmployeeManagementService {
      * {@inheritDoc}
      */
     public boolean validateEmailId(String emailId) throws EMSException {
-        return (!(displayEmployee().stream().anyMatch
+        return (!(getAllEmployee().stream().anyMatch
                 (employeeDTO -> employeeDTO.getEmailId().equals(emailId))));
     }
 
@@ -126,14 +141,14 @@ public class EmployeeManagementService {
      */
     public boolean isEmployeeIdExists(int employeeId) throws EMSException {
 
-        List<Employee> employee = employeeDao.displayEmployee();
+        List<Employee> employees = employeeDao.getAllEmployee();
         boolean isValid = false;
         EmployeeDTO employeeDto = null;
 
-        for (int i=0; i < employee.size(); i++) {
+        for (Employee employee : employees) {
 
-            if (employee.get(i).getEmployeeId() == employeeId) {
-                employeeDto = (employeeMapper.toEmployeeDTO(employee.get(i)));
+            if (employee.getEmployeeId() == employeeId) {
+                employeeDto = (employeeMapper.toEmployeeDTO(employee));
                 isValid = true;
             }
         }
@@ -145,13 +160,13 @@ public class EmployeeManagementService {
      */
     public EmployeeDTO getEmployeeIdPresent(int employeeId) throws EMSException {
 
-        List<Employee> employee = employeeDao.displayEmployee();
+        List<Employee> employees = employeeDao.getAllEmployee();
         EmployeeDTO employeeDto = null;
 
-        for (int i=0; i < employee.size(); i++) {
+        for (Employee employee : employees) {
 
-            if (employee.get(i).getEmployeeId() == employeeId) {
-                employeeDto = (employeeMapper.toEmployeeDTO(employee.get(i)));
+            if (employee.getEmployeeId() == employeeId) {
+                employeeDto = (employeeMapper.toEmployeeDTO(employee));
             }
         }
         return employeeDto;

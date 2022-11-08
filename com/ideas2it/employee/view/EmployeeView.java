@@ -4,8 +4,8 @@ import com.ideas2it.employee.constant.EmployeeManagementConstant;
 import com.ideas2it.employee.controller.EmployeeController;
 import com.ideas2it.employee.dto.AddressDTO;
 import com.ideas2it.employee.dto.EmployeeDTO;
-import com.ideas2it.employee.dao.Dao;
-import com.ideas2it.employee.dao.impl.EmployeeDao;
+import com.ideas2it.employee.dto.ProjectDTO;
+import com.ideas2it.employee.dao.EmployeeDao;
 import com.ideas2it.employee.exception.EMSException;
 import com.ideas2it.employee.service.EmployeeService;
 import com.ideas2it.employee.util.ValidationUtil;
@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * This method used to get the details of the employee from the user
+ * Used to get the details of the employee from the user
  * and set in the pojo class.
  * @version 2.0.  13-09-2022.
  * @author  ESAKKIRAJA E.
@@ -50,7 +50,7 @@ public class EmployeeView {
         int exitOption = 1;
 
         StringBuilder menuOption = new StringBuilder();
-        menuOption.append("Employee Management - \n\n")
+        menuOption.append("*****Employee Management***** \n\n")
                   .append("\ta - CREATE \n")
                   .append("\tb - DISPLAY \n\tc - UPDATE \n\td - DELETE \n")
                   .append("\te - SEARCH \n\tf - EXIT \n\n");
@@ -83,6 +83,7 @@ public class EmployeeView {
 
                 case "f":
                     exitOption = 0;
+                    System.out.println("----EMPLOYEE PORTAL EXIT----");
                     break;
 
                 default:
@@ -99,8 +100,11 @@ public class EmployeeView {
      * Get the employee values from the user.
      */
     public void createEmployee(){
+        List<ProjectDTO> projects = new ArrayList<>();
         List<AddressDTO> addressDTOs = new ArrayList<>();
         System.out.println(EmployeeManagementConstant.VALID_INPUT);
+        List<ProjectDTO> projectDTO = null;
+        boolean isCheckProject;
 
         try {
             int employeeId = 0;
@@ -116,13 +120,18 @@ public class EmployeeView {
             AddressDTO addresses = addAddress();
             addressDTOs.add(addresses);
             addresses = addAnotherAddress();
+            isCheckProject = getResponse();
+
+            if(isCheckProject) {
+                projects = getProject(projects);
+            }
 
             if (addresses != null)   {
                 addressDTOs.add(addresses);
             }
             employeeDTO = new EmployeeDTO(firstName, lastName, employeeId,
                     role, mobileNumber, emailId, salary, addressDTOs,
-                    joiningDate,  dateOfBirth, gender);
+                    joiningDate,  dateOfBirth, gender, projects);
 
             employeeId = employeeController.addEmployee(employeeDTO);
             logger.info("Employee details stored");
@@ -159,7 +168,7 @@ public class EmployeeView {
 
         try {
             List<EmployeeDTO> employeesDetail = employeeController.
-                                                displayEmployee();
+                                                getAllEmployee();
 
             if (employeesDetail.size() > 0) {
                 Iterator<EmployeeDTO> iterator = employeesDetail.iterator(); 
@@ -249,6 +258,10 @@ public class EmployeeView {
 
                                 case 11:
                                     isValid = true;
+                                    break;
+
+                                case 12:
+                                    employeeDto.setProject(getProject(employeeDto.getProject()));
                                     break;
 
                                 default:
@@ -860,5 +873,79 @@ public class EmployeeView {
             
         } while(!isValid);  
         return dateOfBirth;
-    }             
+    }
+
+    /**
+     * check ProjectId exists or not.
+     * @return Return projectId.
+     */
+    public int getProjectId() {
+      boolean isValid = false;
+      int projectId;
+      System.out.println("Enter the Project ID :"); 
+      do {
+          projectId = Integer.parseInt(scanner.nextLine());
+          if(employeeController.isValid(EmployeeManagementConstant.
+                   REGEX_EMPLOYEEID,String.valueOf(projectId))) {
+              isValid = true;
+          } else {
+              System.out.println("Invalid Project ID... try again" + "ProjectID" + projectId);
+          }
+      } while(!isValid);
+      return projectId;
+      }  
+
+    /**
+     * check Project exists or not.
+     * @return Return projects.
+     */
+    public List<ProjectDTO> getProject(List<ProjectDTO> projects) {
+        ProjectDTO projectDTO = null;
+        boolean isCheckProject;
+        try {
+            do {
+                projectDTO = employeeController.getProject(getProjectId());
+
+                if(null != projectDTO) {
+                    projects.add(projectDTO);
+                }
+                isCheckProject = getResponse();
+            } while(isCheckProject);
+        } catch(EMSException e) {
+            System.out.println("EMS EXCEPTION");
+        }
+        return projects;
+    }
+
+    /**
+     * get response from user to assign the employee for project
+     * @return Return value.
+     */
+    public boolean getResponse() {
+        boolean isCheckProject = false;
+        boolean isValid;
+        System.out.println("If you want add Project press y for Yes/ n for No");
+        String option;
+
+        do {
+            isValid = true;
+            option = scanner.nextLine();
+
+            switch(option) {
+                case "y":
+                    isCheckProject = true;
+                    break;
+
+                case "n":
+                    isCheckProject = false;
+                    break;
+
+                default:
+                    isValid = false;
+                    System.out.println("Invalid input");
+            }
+        } while(!isValid);
+        return isCheckProject;
+    }
+    
 }

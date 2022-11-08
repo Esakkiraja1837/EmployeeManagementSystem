@@ -2,19 +2,23 @@ package com.ideas2it.employee.mapper;
 
 import com.ideas2it.employee.dto.AddressDTO;
 import com.ideas2it.employee.dto.EmployeeDTO;
+import com.ideas2it.employee.dto.ProjectDTO;
 import com.ideas2it.employee.model.Address;
 import com.ideas2it.employee.model.Employee;
+import com.ideas2it.employee.model.Project;
+import com.ideas2it.employee.mapper.ProjectMapper;
+
 import java.util.ArrayList;
 import java.util.List;
 
 
-/*
+/**
  * class Convert DTO object to model Object and Model to DTO
  *
  */
 public class EmployeeMapper {
 
-    /*
+    /**
      * Convert Employee model object to EmployeeDTO object
      * 
      * @param employeeDTO 
@@ -23,6 +27,8 @@ public class EmployeeMapper {
     public static EmployeeDTO toEmployeeDTO(Employee employee) {
         EmployeeDTO employeeDTO = new EmployeeDTO();
         List<AddressDTO> addressDTOs = new ArrayList<AddressDTO>();
+        List<ProjectDTO> projectDTOs = new ArrayList<ProjectDTO>();
+        ProjectMapper projectMapper = new ProjectMapper();
 
         if (null != employee) {
             employeeDTO.setEmployeeId(employee.getEmployeeId());
@@ -40,6 +46,15 @@ public class EmployeeMapper {
                  }
                  employeeDTO.setAddress(addressDTOs);
             }
+
+
+            if(null != employee.getProject()) {
+                for (Project projects : employee.getProject()) {
+                    projectDTOs.add(toProjectDTO(projects));
+                 }
+                 employeeDTO.setProject(projectDTOs);
+            }
+
             employeeDTO.setJoiningDate(employee.getJoiningDate());
             employeeDTO.setDateOfBirth(employee.getDateOfBirth());
             employeeDTO.setGender(employee.getGender());
@@ -47,7 +62,7 @@ public class EmployeeMapper {
         return employeeDTO;
     }
 
-    /*
+    /**
      * Convert EmployeeDTO object to Employee model object
      *
      * @param employee 
@@ -56,6 +71,8 @@ public class EmployeeMapper {
     public static Employee toEmployee(EmployeeDTO employeeDTO) {
         Employee employee = new Employee();
         List<Address> addresses = new ArrayList<Address>();
+        List<Project> projects = new ArrayList<Project>();
+        ProjectMapper projectMapper = new ProjectMapper();
 
         if (null != employeeDTO) {
             employee.setEmployeeId(employeeDTO.getEmployeeId());
@@ -74,6 +91,14 @@ public class EmployeeMapper {
                 }
                 employee.setAddress(addresses);
             }
+
+            if(null != employeeDTO.getProject()) {
+                for (ProjectDTO projects1 : employeeDTO.getProject()) {
+                    projects.add(toProject(projects1));
+                 }
+                 employee.setProject(projects);
+            }
+
             employee.setJoiningDate(employeeDTO.getJoiningDate());
             employee.setDateOfBirth(employeeDTO.getDateOfBirth());
             employee.setGender(employeeDTO.getGender());
@@ -81,7 +106,7 @@ public class EmployeeMapper {
         return employee;
     }
 
-    /*
+    /**
      * Convert Address model object to AddressDTO object
      *
      * @param addressDTO 
@@ -101,7 +126,7 @@ public class EmployeeMapper {
         return addressDTO;
     }
 
-    /*
+    /**
      * Convert AddressDTO object to Address model object
      *
      * @param address
@@ -119,5 +144,52 @@ public class EmployeeMapper {
         address.setType(addressDTO.getType());
 
         return address;
+    }
+
+    /**
+     * Convert Project object to ProjectDTO model object
+     *
+     * @param project
+     * @return projectDTO.
+     */
+    public static ProjectDTO toProjectDTO(Project project) {
+
+        ProjectDTO projectDTO = new ProjectDTO();
+        List<EmployeeDTO> employeeDTOS = new ArrayList<EmployeeDTO>();
+
+        if(null != project) {
+            projectDTO.setProjectId(project.getProjectId());
+            projectDTO.setProjectName(project.getProjectName());
+            projectDTO.setDomain(project.getDomain());
+            projectDTO.setClientName(project.getClientName());
+            projectDTO.setClientEmailId(project.getClientEmailId());
+            projectDTO.setStartDate(project.getStartDate());
+            projectDTO.setDueDate(project.getDueDate());
+            projectDTO.setEndDate(project.getEndDate());
+        }
+        return projectDTO;
+    }
+
+    /**
+     * Convert ProjectDTO object to Project model object
+     *
+     * @param ProjectDTO
+     * @return Project.
+     */
+    public static Project toProject(ProjectDTO projectDTO) {
+        Project project = new Project();
+        List<Employee> employee = new ArrayList<Employee>();
+
+        if(null != projectDTO) {
+            project.setProjectId(projectDTO.getProjectId());
+            project.setProjectName(projectDTO.getProjectName());
+            project.setDomain(projectDTO.getDomain());
+            project.setClientName(projectDTO.getClientName());
+            project.setClientEmailId(projectDTO.getClientEmailId());
+            project.setStartDate(projectDTO.getStartDate());
+            project.setDueDate(projectDTO.getDueDate());
+            project.setEndDate(projectDTO.getEndDate());
+        }
+        return project;
     }
 }
