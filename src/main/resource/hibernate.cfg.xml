@@ -14,8 +14,8 @@
         <property name = "format_sql">true</property>
         <property name="hibernate.enable_lazy_load_no_trans">true</property>
 
-        <mapping resource="resource/Employee.hbm.xml"/>
-        <mapping resource="resource/Address.hbm.xml"/>
-        <mapping resource="resource/Project.hbm.xml"/>
+        <mapping resource="Employee.hbm.xml"/>
+        <mapping resource="Address.hbm.xml"/>
+        <mapping resource="Project.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>
