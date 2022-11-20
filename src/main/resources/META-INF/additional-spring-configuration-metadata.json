@@ -1,0 +1,152 @@
+{"properties": [
+  {
+    "name": "appender.file.layout.type",
+    "type": "java.lang.String",
+    "description": "A description for 'appender.file.layout.type'"
+  },
+  {
+    "name": "appender.file.fileName",
+    "type": "java.lang.String",
+    "description": "A description for 'appender.file.fileName'"
+  },
+  {
+    "name": "appender.file.name",
+    "type": "java.lang.String",
+    "description": "A description for 'appender.file.name'"
+  },
+  {
+    "name": "appender.file.type",
+    "type": "java.lang.String",
+    "description": "A description for 'appender.file.type'"
+  },
+  {
+    "name": "appender.file.layout.pattern",
+    "type": "java.lang.String",
+    "description": "A description for 'appender.file.layout.pattern'"
+  },
+  {
+    "name": "appender.file.fileName",
+    "type": "java.lang.String",
+    "description": "A description for 'appender.file.fileName'"
+  },
+  {
+    "name": "appender.file.fileName",
+    "type": "java.lang.String",
+    "description": "A description for 'appender.file.fileName'"
+  },
+  {
+    "name": "appender.file.fileName",
+    "type": "java.lang.String",
+    "description": "A description for 'appender.file.fileName'"
+  },
+  {
+    "name": "appender.file.fileName",
+    "type": "java.lang.String",
+    "description": "A description for 'appender.file.fileName'"
+  },
+  {
+    "name": "appender.file.fileName",
+    "type": "java.lang.String",
+    "description": "A description for 'appender.file.fileName'"
+  },
+  {
+    "name": "appender.file.fileName",
+    "type": "java.lang.String",
+    "description": "A description for 'appender.file.fileName'"
+  },
+  {
+    "name": "appender.file.fileName",
+    "type": "java.lang.String",
+    "description": "A description for 'appender.file.fileName'"
+  },
+  {
+    "name": "appender.file.fileName",
+    "type": "java.lang.String",
+    "description": "A description for 'appender.file.fileName'"
+  },
+  {
+    "name": "appender.file.fileName",
+    "type": "java.lang.String",
+    "description": "A description for 'appender.file.fileName'"
+  },
+  {
+    "name": "appender.file.fileName",
+    "type": "java.lang.String",
+    "description": "A description for 'appender.file.fileName'"
+  },
+  {
+    "name": "appender.file.file",
+    "type": "java.lang.String",
+    "description": "A description for 'appender.file.file'"
+  },
+  {
+    "name": "log4j.appender.console.layout.ConversionPattern",
+    "type": "java.lang.String",
+    "description": "A description for 'log4j.appender.console.layout.ConversionPattern'"
+  },
+  {
+    "name": "log4j.appender.console.layout.ConversionPattern",
+    "type": "java.lang.String",
+    "description": "A description for 'log4j.appender.console.layout.ConversionPattern'"
+  },
+  {
+    "name": "log4j.appender.console.layout.ConversionPattern",
+    "type": "java.lang.String",
+    "description": "A description for 'log4j.appender.console.layout.ConversionPattern'"
+  },
+  {
+    "name": "log4j.appender.console.layout.ConversionPattern",
+    "type": "java.lang.String",
+    "description": "A description for 'log4j.appender.console.layout.ConversionPattern'"
+  },
+  {
+    "name": "log4j.appender.console.layout.ConversionPattern",
+    "type": "java.lang.String",
+    "description": "A description for 'log4j.appender.console.layout.ConversionPattern'"
+  },
+  {
+    "name": "appender.console.layout.ConversionPattern",
+    "type": "java.lang.String",
+    "description": "A description for 'appender.console.layout.ConversionPattern'"
+  },
+  {
+    "name": "appender.console.layout.ConversionPattern",
+    "type": "java.lang.String",
+    "description": "A description for 'appender.console.layout.ConversionPattern'"
+  },
+  {
+    "name": "appender.console.layout.ConversionPattern",
+    "type": "java.lang.String",
+    "description": "A description for 'appender.console.layout.ConversionPattern'"
+  },
+  {
+    "name": "appender.file.MaxFileSize",
+    "type": "java.lang.String",
+    "description": "A description for 'appender.file.MaxFileSize'"
+  },
+  {
+    "name": "logger.file.name",
+    "type": "java.lang.String",
+    "description": "A description for 'logger.file.name'"
+  },
+  {
+    "name": "logger.patter.file",
+    "type": "java.lang.String",
+    "description": "A description for 'logger.patter.file'"
+  },
+  {
+    "name": "appender.file.MaxFileSize",
+    "type": "java.lang.String",
+    "description": "A description for 'appender.file.MaxFileSize'"
+  },
+  {
+    "name": "logger.pattern.file",
+    "type": "java.lang.String",
+    "description": "A description for 'logger.pattern.file'"
+  },
+  {
+    "name": "logger.pattern.file",
+    "type": "java.lang.String",
+    "description": "A description for 'logger.pattern.file'"
+  }
+]}
